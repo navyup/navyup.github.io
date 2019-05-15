@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>人工智能 on Bring A Big Idea to You</title>
+    <link>http://www.shakebyte.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</link>
+    <description>Recent content in 人工智能 on Bring A Big Idea to You</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>海 萨</copyright>
+    <lastBuildDate>Fri, 03 May 2019 15:26:04 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.shakebyte.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[Tensorflow2.0] 第一弹 “HelloWorld”</title>
+      <link>http://www.shakebyte.com/post/190502_tf2_helloworld/</link>
+      <pubDate>Fri, 03 May 2019 15:26:04 -0500</pubDate>
+      
+      <guid>http://www.shakebyte.com/post/190502_tf2_helloworld/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

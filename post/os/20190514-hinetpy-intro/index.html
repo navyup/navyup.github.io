@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[数据处理] HinetPy开源软件-日本地震波形数据 - Bring A Big Idea to You</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="海萨" /><meta name="description" content="HinetPy 是一个用于从日本 NIED Hi-net 网站下载地震波形数据并进行数据格式转换的Python模块。
+" /><meta name="keywords" content="地震数据, 波形数据" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.5 with even 4.0.0" />
+
+
+<link rel="canonical" href="http://www.shakebyte.com/post/os/20190514-hinetpy-intro/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[数据处理] HinetPy开源软件-日本地震波形数据" />
+<meta property="og:description" content="HinetPy 是一个用于从日本 NIED Hi-net 网站下载地震波形数据并进行数据格式转换的Python模块。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.shakebyte.com/post/os/20190514-hinetpy-intro/" />
+<meta property="article:published_time" content="2019-05-14T18:18:53-05:00"/>
+<meta property="article:modified_time" content="2019-05-14T18:18:53-05:00"/>
+
+<meta itemprop="name" content="[数据处理] HinetPy开源软件-日本地震波形数据">
+<meta itemprop="description" content="HinetPy 是一个用于从日本 NIED Hi-net 网站下载地震波形数据并进行数据格式转换的Python模块。">
+
+
+<meta itemprop="datePublished" content="2019-05-14T18:18:53-05:00" />
+<meta itemprop="dateModified" content="2019-05-14T18:18:53-05:00" />
+<meta itemprop="wordCount" content="786">
+
+
+
+<meta itemprop="keywords" content="开源软件,数据处理," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[数据处理] HinetPy开源软件-日本地震波形数据"/>
+<meta name="twitter:description" content="HinetPy 是一个用于从日本 NIED Hi-net 网站下载地震波形数据并进行数据格式转换的Python模块。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ShakeByte</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ShakeByte</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">[数据处理] HinetPy开源软件-日本地震波形数据</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-05-14 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/"> 开源软件 </a>
+            </div>
+          <span class="more-meta"> 约 786 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#hinetpy">HinetPy</a></li>
+<li><a href="#主要功能">主要功能</a></li>
+<li><a href="#如何安装">如何安装</a></li>
+<li><a href="#获取并转换波形数据">获取并转换波形数据</a></li>
+<li><a href="#获取走时目录">获取走时目录</a></li>
+<li><a href="#获取震源机制解目录">获取震源机制解目录</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>HinetPy 是一个用于从日本 NIED Hi-net 网站下载地震波形数据并进行数据格式转换的Python模块。</p>
+
+<h1 id="hinetpy">HinetPy</h1>
+
+<p>HinetPy 是一个Python模块，致力于自动化和简化从日本NIED Hi-net相关的繁琐的数据申请、下载地震波形数据并进行数据格式转换工作。</p>
+
+<h1 id="主要功能">主要功能</h1>
+
+<ul>
+<li><p>从Hi-net申请连续波形数据</p></li>
+
+<li><p>从Hi-net申请事件波形数据</p></li>
+
+<li><p>选择一个矩形或环形区域内的Hi-net/F-net台站</p></li>
+
+<li><p>将波形数据从win32格式转换为SAC格式</p></li>
+
+<li><p>提取仪器响应信息并保存为SAC零极点文件</p></li>
+
+<li><p>多线程并行下载和转换以加快速度</p></li>
+</ul>
+
+<h1 id="如何安装">如何安装</h1>
+
+<blockquote>
+<p>HinetPy 只支持Python 3.4 及以上的版本</p>
+</blockquote>
+
+<p>python环境直接使用下命令安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pip</span> <span class="n">install</span> <span class="n">HinetPy</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>从 Hi-net 获取的波形数据为不常见/用的WIN32 格式，Hi-net 提供了 win32tools 来实现波形数据的基本处理和转换。她是 NIED Hi-net 提供的用于处理win32格式数据的一系列工具。HinetPy 需要其中的 catwin32 和 win2sac_32 。请确保 catwin32 和 win2sac_32 在你的PATH中。</p>
+</blockquote>
+
+<p>中文教程:<a href="https://seisman.github.io/HinetPy/zh_CN/index.html">https://seisman.github.io/HinetPy/zh_CN/index.html</a></p>
+
+<h1 id="获取并转换波形数据">获取并转换波形数据</h1>
+
+<p>HinetPy 功能强大，使得从Hi-net申请连续数据、将数据转换为SAC格式、提取仪器响应文件并保存为SAC零极点文件变得很简单。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">win32</span>
+<span class="c1"># 根据你的注册的 Hi-net 账户信息修改 username, password，需要注册</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="p">,</span> <span class="s2">&#34;password&#34;</span><span class="p">)</span>
+<span class="c1"># 开始申请数据</span>
+<span class="c1"># &#39;0101&#39; 是 Hi-net 的代号</span>
+<span class="n">data</span><span class="p">,</span> <span class="n">ctable</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_waveform</span><span class="p">(</span><span class="s1">&#39;0101&#39;</span><span class="p">,</span> <span class="s1">&#39;201001010000&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="c1"># 等待数据的申请和下载，一般需要几分钟时间</span>
+<span class="c1"># 下载完成会在当前目录下生成cnt格式的数据文件和channle table文件</span>
+<span class="c1"># 0101_201001010000_20.cnt 0101_20100101.ch</span>
+<span class="c1"># 将 cnt 数据转换为 SAC 格式</span>
+<span class="n">win32</span><span class="o">.</span><span class="n">extract_sac</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ctable</span><span class="p">)</span>
+<span class="c1"># 从 channel table 中提取令极点信息并保存为 SAC PZ 格式</span>
+<span class="n">win32</span><span class="o">.</span><span class="n">extract_pz</span><span class="p">(</span><span class="n">ctable</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="获取走时目录">获取走时目录</h1>
+
+<p>Hi-net提供了JMA走时数据供下载。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="p">,</span> <span class="s2">&#34;password&#34;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">startdate</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">get_arrivaltime</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="s1">&#39;measure_20100101_5.txt&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="获取震源机制解目录">获取震源机制解目录</h1>
+
+<p>Hi-net提供了JMA震源机制解目录供下载。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">HinetPy</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="p">,</span> <span class="s2">&#34;password&#34;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">startdate</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">get_focalmechanism</span><span class="p">(</span><span class="n">startdate</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="s1">&#39;mecha_20100101_5.txt&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">海萨</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-05-14
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content">MIT</span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="../../img/reward/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/">开源软件</a>
+          <a href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">数据处理</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/tf2/201905012-cnn/">
+            <span class="next-text nav-default">[深度学习] 什么是卷积神经网络</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:navyup@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://github.com/navyup" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://www.shakebyte.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 -
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy;
+    2018 -
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">海 萨</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

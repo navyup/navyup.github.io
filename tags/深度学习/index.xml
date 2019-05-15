@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>深度学习 on Bring A Big Idea to You</title>
+    <link>http://www.shakebyte.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</link>
+    <description>Recent content in 深度学习 on Bring A Big Idea to You</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>海 萨</copyright>
+    <lastBuildDate>Sun, 12 May 2019 10:35:40 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.shakebyte.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[深度学习] 什么是卷积神经网络</title>
+      <link>http://www.shakebyte.com/post/tf2/201905012-cnn/</link>
+      <pubDate>Sun, 12 May 2019 10:35:40 -0500</pubDate>
+      
+      <guid>http://www.shakebyte.com/post/tf2/201905012-cnn/</guid>
+      <description>前沿 人工智能正加快催化人机交互方面的应用，并树立了一个个令人惊叹的里程碑。无数的应用领域的正在发生翻天覆地的变化，计算机视觉也是其中领域之一</description>
+    </item>
+    
+    <item>
+      <title>[Tensorflow2.0] 计算机视觉入门 - Fashion Mnist</title>
+      <link>http://www.shakebyte.com/post/20190505-tf2-fashionmnist/</link>
+      <pubDate>Sun, 05 May 2019 11:18:28 -0500</pubDate>
+      
+      <guid>http://www.shakebyte.com/post/20190505-tf2-fashionmnist/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;摘要：&lt;/strong&gt; 机器学习是基于统计学和物理模型的方法，计算机视觉则是具体的一个研究领域，这个领域会用到机器学习的方法来解决问题；而人工智能是一个更大的范畴。本文使用Tensorflow 2.0建立模型在Fashion mnist数据集上训练和测试，模型取得了较高的准确性。作为计算机视觉领域的入门课程，通过该实验，希望给感兴趣的朋友心里种下一颗种子。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[Tensorflow2.0] 第一弹 “HelloWorld”</title>
+      <link>http://www.shakebyte.com/post/190502_tf2_helloworld/</link>
+      <pubDate>Fri, 03 May 2019 15:26:04 -0500</pubDate>
+      
+      <guid>http://www.shakebyte.com/post/190502_tf2_helloworld/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

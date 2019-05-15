@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[深度学习] 什么是卷积神经网络 - Bring A Big Idea to You</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="海萨" /><meta name="description" content="前沿 人工智能正加快催化人机交互方面的应用，并树立了一个个令人惊叹的里程碑。无数的应用领域的正在发生翻天覆地的变化，计算机视觉也是其中领域之一" /><meta name="keywords" content="卷积神经网络, CNN" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.5 with even 4.0.0" />
+
+
+<link rel="canonical" href="http://www.shakebyte.com/post/tf2/201905012-cnn/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[深度学习] 什么是卷积神经网络" />
+<meta property="og:description" content="前沿 人工智能正加快催化人机交互方面的应用，并树立了一个个令人惊叹的里程碑。无数的应用领域的正在发生翻天覆地的变化，计算机视觉也是其中领域之一" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.shakebyte.com/post/tf2/201905012-cnn/" />
+<meta property="article:published_time" content="2019-05-12T10:35:40-05:00"/>
+<meta property="article:modified_time" content="2019-05-12T10:35:40-05:00"/>
+
+<meta itemprop="name" content="[深度学习] 什么是卷积神经网络">
+<meta itemprop="description" content="前沿 人工智能正加快催化人机交互方面的应用，并树立了一个个令人惊叹的里程碑。无数的应用领域的正在发生翻天覆地的变化，计算机视觉也是其中领域之一">
+
+
+<meta itemprop="datePublished" content="2019-05-12T10:35:40-05:00" />
+<meta itemprop="dateModified" content="2019-05-12T10:35:40-05:00" />
+<meta itemprop="wordCount" content="2479">
+
+
+
+<meta itemprop="keywords" content="深度学习," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[深度学习] 什么是卷积神经网络"/>
+<meta name="twitter:description" content="前沿 人工智能正加快催化人机交互方面的应用，并树立了一个个令人惊叹的里程碑。无数的应用领域的正在发生翻天覆地的变化，计算机视觉也是其中领域之一"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ShakeByte</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ShakeByte</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">[深度学习] 什么是卷积神经网络</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-05-12 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"> 机器学习 </a>
+            </div>
+          <span class="more-meta"> 约 2479 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#前沿">前沿</a></li>
+<li><a href="#卷积神经网络">卷积神经网络</a>
+<ul>
+<li><a href="#什么是卷积">什么是卷积</a></li>
+<li><a href="#卷积神经网络-1">卷积神经网络</a></li>
+</ul></li>
+<li><a href="#关于图像">关于图像</a>
+<ul>
+<li><a href="#图像">图像</a></li>
+<li><a href="#图像与矩阵">图像与矩阵</a></li>
+<li><a href="#图像的色彩">图像的色彩</a></li>
+</ul></li>
+<li><a href="#cnn特征提取特性">CNN特征提取特性</a>
+<ul>
+<li><a href="#特征提取过程">特征提取过程</a></li>
+<li><a href="#卷积层与平铺层区别">卷积层与平铺层区别</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h1 id="前沿">前沿</h1>
+
+<p>人工智能正加快催化人机交互方面的应用，并树立了一个个令人惊叹的里程碑。无数的应用领域的正在发生翻天覆地的变化，计算机视觉也是其中领域之一。计算式视觉使得机器具备人类一样的类似行为，并可以运用知识去完成一些数字工程任务，诸如图像与语音识别、图像分析与分类、传媒娱乐、推荐系统以及自然语言处理等。</p>
+
+<p>而随着时间的推移，深度学习在计算机视觉方面的进步已经得到了大量应用和完善，主要是通过一种特殊的算法——卷积神经网络（Convolutional Neural Network, CNN）。</p>
+
+<h1 id="卷积神经网络">卷积神经网络</h1>
+
+<h2 id="什么是卷积">什么是卷积</h2>
+
+<p>首先我们先来回顾一下卷积公式：
+<img src="../../img/v2-457da5a47b952967d07f786bbca52ec8_hd.jpg" alt="" />，它是分析数学中一种重要的运算。</p>
+
+<p>其物理意义是描述系统某一时刻的输出是由多个输入共同作用（叠加）的结果。或者卷积可以说成是一个函数（如：单位响应）在另一个函数（如：输入信号）上的加权叠加。
+例如放在图像分析里，f(x) 可以理解为原始像素点(source pixel)，所有的原始像素点叠加起来，就是原始图了。而g(x)可以称为作用点，所有作用点合起来我们称为卷积核（convolution kernel）。卷积核也被称为滤镜（filter）。</p>
+
+<p>卷积核上所有作用点依次作用于原始像素点后（即乘起来），线性叠加的输出结果，即是最终卷积的输出。其过程相当于使用滤镜扫描了一遍原始图像。</p>
+
+<p><strong>举例说明：蒸馒头的例子</strong></p>
+
+<p>楼下早点铺子生意太好了，供不应求，就买了一台机器，不断的生产馒头。</p>
+
+<p>假设馒头的生产速度是 f(t) ，那么一天后生产出来的馒头总量为：
+<img src="../../img/equation.svg" alt="" /></p>
+
+<p>馒头生产出来之后，就会慢慢腐败，假设腐败函数为 g(t) ，比如，10个馒头，24小时会腐败：    10*g(t)</p>
+
+<p>因此，第一个小时生产出来的馒头，一天后会经历24小时的腐败，第二个小时生产出来的馒头，一天后会经历23小时的腐败。</p>
+
+<p>我们可以知道，一天后，馒头总共腐败了：
+<img src="../../img/equation2.svg" alt="" /></p>
+
+<p><strong>小结一下：</strong></p>
+
+<p>（1）原始图像通过与卷积核（滤镜）的数学运算，可以提取出图像的某些指定特征（features)。</p>
+
+<p>（2）不同卷积核，提取的特征也是不一样的。</p>
+
+<p>（3）提取的特征一样，不同的卷积核，效果也不一样。</p>
+
+<h2 id="卷积神经网络-1">卷积神经网络</h2>
+
+<p>卷积神经网络（Convolutional Neural Network, CNN）是一种深度学习算法，它可以以图像作为输入，从而挖掘图像中的各个维度的特征以提取出权重系数或偏离值，而达到区别它们的目的。也就是说，图像通过CNN运算可以学习到一种权值和偏差(wights and bias)。</p>
+
+<p>与其他分类算法相比，CNN所需的预处理要低得多。在以前的传统方法中，过滤器（Filter）是手工设计并经过足够的训练而得到的，但CNN能够快速的通过学习得到这些过滤器/特性。CNN结构类似于人类大脑中的脑细胞结构，它的提出也是源于视觉皮层组织。单个神经元只在视野的一个被称为接受域的有限区域对刺激做出反应。这些区域的集合通过重叠从而覆盖整个视觉区域。</p>
+
+<p>在对于手写体的中的数字识别实验中，我们可以通过CNN来训练模型，让模型对数字的识别准确率基本接近于100%。（具体实验可以查看深度学习中的Mnist教程，流程如下图）</p>
+
+<p><img src="../../img/1_uAeANQIOQPqWZnnuH-VEyw.jpeg" alt="" />
+图1：CNN在识别手写字中的结构</p>
+
+<h1 id="关于图像">关于图像</h1>
+
+<h2 id="图像">图像</h2>
+
+<p>图像(Image)，通常也成为图片，它可以是通过照相机或者扫描得来，也可以是通过数值绘画出来。</p>
+
+<h2 id="图像与矩阵">图像与矩阵</h2>
+
+<p>一个图像，其实就是一个用像素值表示的矩阵。图像的大小通常使用N*M表示，它表示图片具有N*M个像素点，而且N是表示的宽度（width）方向的像素点，M是高度（height）方向的像素点。而矩阵的大小通常用M*N表示，即M行（row）, N列（column）。例如 800*600的图像，其总共有480000个像素点，并且宽度方向是有800个像素，高度方向有600个像素点，其对应到矩阵是一个600*800的大小的矩阵。</p>
+
+<h2 id="图像的色彩">图像的色彩</h2>
+
+<p>我们知道，红、绿、蓝（Red, Green, Blue）是我们的三原色（或三基色），任何色彩都可以使用它们表示出来（此处暂不论其他组合的基色）。任何一种基色都可以使用一个字节来表示，即2的8次方表示，即0-255数值表示，因此任何一个颜色都可以使用三种基色的数值组合而来。通常我们把三个基色在图像中称之为三个通道（或称为分量），如R通道，G通道和B通道。因此图像的颜色可以使用（R，G，B）来表示，如（0,0,0）为纯黑色，（255,0,0）为纯红色，（0,255,0）为纯绿色，（0,0,255）为纯蓝色，（255,255,255）为纯白色，（128，0，128）为紫色等等。</p>
+
+<p>单个像素上的像素值（反映的是颜色的强度），就是RGB对应三个通道合成值，也可以理解成单个像素的值具有三个分量（R，G，B）。通常图像有灰度和彩色之分，灰度图片我们可以RGB三个值是相等的，彩色图片三个通道值是不完全相等的，如果相等了就是灰度图片。因此我们通常人为灰度图像只有一个通道，即只用一个像素值来表示。颜色图像可以看做是三个通道的叠加，如图所示：</p>
+
+<p><img src="../../img/1_15yDvGKV47a0nkf5qLKOOQ.png" alt="" /></p>
+
+<h1 id="cnn特征提取特性">CNN特征提取特性</h1>
+
+<h2 id="特征提取过程">特征提取过程</h2>
+
+<p>CNN 一般具有较好的特征提取功能，那么为什么CNN 会具有这种特性呢？我们在使用CNN处理输入的图像时，相当于使用一个滤镜（filter）对于原图进行了扫描，得到了一个新的且比原图小的图像。该小图像具备了卷积后的特性，且变小了，说明其具有一定压缩性，从而减小计算量。下图展示了特定的滤镜扫描原图像的过程。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">#不同滤镜的选择，提出的特征是不一样的，本例中的滤镜是
+          1  0  1
+Filter =  0  1  0
+          1  0  1</pre></td></tr></table>
+</div>
+</div>
+<p><img src="../../img/1_nYf_cUIHFEWU1JXGwnz-Ig.gif" alt="" />
+图2.滤镜扫描示意图
+<img src="../../img/1_GcI7G-JLAQiEoCON7xFbhg.gif" alt="" />
+图3.采用特定滤镜扫描后的计算结果
+<img src="../../img/1_ciDgQEjViWLnCbmX-EeSrA.gif" alt="" />
+图4.图像的三个通道一起扫描时的示意图</p>
+
+<h2 id="卷积层与平铺层区别">卷积层与平铺层区别</h2>
+
+<p>平铺层（Flatten），是指将矩阵按照一定的顺序铺开，从而将M*N的矩阵变成MN*1的向量，即将多维矩阵变成一维向量。
+如图：</p>
+
+<p><img src="../../img/1_GLQjM9k0gZ14nYF0XmkRWQ.png" alt="" /></p>
+
+<p>平铺层在做简单的图像分类时，兴许还能有些用，但在复杂图像处理时，就很难保证正确性。</p>
+
+<p>平铺层特征提取时不用，因为它将图像的空间信息天然抛弃了，如像素点周围的空间像素值和其本身的像素值之间的关系在图像压平后就不存在了。</p>
+
+<p>而卷基层保留了图像里的空间关系和时序关系，即便是通过滤镜扫描后，其关系依然存在，而且特征还具有增强效果。但平铺层在深度学习中常常与全连接层（Dense）配合使用，作为其输入应用。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">海萨</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-05-12
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content">MIT</span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="../../img/reward/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/os/20190514-hinetpy-intro/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">[数据处理] HinetPy开源软件-日本地震波形数据</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/tf2/20190508-horse-and-human/">
+            <span class="next-text nav-default">[Tensorflow2.0] Horse or Human</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:navyup@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://github.com/navyup" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://www.shakebyte.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 -
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy;
+    2018 -
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">海 萨</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>神经网络 on Bring A Big Idea to You</title>
+    <link>http://www.shakebyte.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</link>
+    <description>Recent content in 神经网络 on Bring A Big Idea to You</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>海 萨</copyright>
+    <lastBuildDate>Wed, 08 May 2019 09:23:13 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.shakebyte.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[Tensorflow2.0] Horse or Human</title>
+      <link>http://www.shakebyte.com/post/tf2/20190508-horse-and-human/</link>
+      <pubDate>Wed, 08 May 2019 09:23:13 -0500</pubDate>
+      
+      <guid>http://www.shakebyte.com/post/tf2/20190508-horse-and-human/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;摘要：&lt;/strong&gt; 本文利用马或人的图片数据来训练模型，让模型经过训练后具备识别新的图片中是含有马或者人，从而达到自动识别（recognition）。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

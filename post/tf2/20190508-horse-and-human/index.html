@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[Tensorflow2.0] Horse or Human - Bring A Big Idea to You</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="海萨" /><meta name="description" content="摘要： 本文利用马或人的图片数据来训练模型，让模型经过训练后具备识别新的图片中是含有马或者人，从而达到自动识别（recognition）。
+" /><meta name="keywords" content="神经网络, 机器学习" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.5 with even 4.0.0" />
+
+
+<link rel="canonical" href="http://www.shakebyte.com/post/tf2/20190508-horse-and-human/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[Tensorflow2.0] Horse or Human" />
+<meta property="og:description" content="摘要： 本文利用马或人的图片数据来训练模型，让模型经过训练后具备识别新的图片中是含有马或者人，从而达到自动识别（recognition）。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.shakebyte.com/post/tf2/20190508-horse-and-human/" />
+<meta property="article:published_time" content="2019-05-08T09:23:13-05:00"/>
+<meta property="article:modified_time" content="2019-05-08T09:23:13-05:00"/>
+
+<meta itemprop="name" content="[Tensorflow2.0] Horse or Human">
+<meta itemprop="description" content="摘要： 本文利用马或人的图片数据来训练模型，让模型经过训练后具备识别新的图片中是含有马或者人，从而达到自动识别（recognition）。">
+
+
+<meta itemprop="datePublished" content="2019-05-08T09:23:13-05:00" />
+<meta itemprop="dateModified" content="2019-05-08T09:23:13-05:00" />
+<meta itemprop="wordCount" content="2680">
+
+
+
+<meta itemprop="keywords" content="机器学习,神经网络," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[Tensorflow2.0] Horse or Human"/>
+<meta name="twitter:description" content="摘要： 本文利用马或人的图片数据来训练模型，让模型经过训练后具备识别新的图片中是含有马或者人，从而达到自动识别（recognition）。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ShakeByte</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ShakeByte</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">[Tensorflow2.0] Horse or Human</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-05-08 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"> 机器学习 </a>
+            </div>
+          <span class="more-meta"> 约 2680 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#训练背景">训练背景</a>
+<ul>
+<li><a href="#数据集">数据集</a></li>
+<li><a href="#训练过程">训练过程</a></li>
+</ul></li>
+<li><a href="#数据准备过程">数据准备过程</a>
+<ul>
+<li><a href="#下载数据">下载数据</a></li>
+<li><a href="#解压数据">解压数据</a></li>
+<li><a href="#组织数据">组织数据</a></li>
+<li><a href="#检查数据">检查数据</a></li>
+</ul></li>
+<li><a href="#训练">训练</a>
+<ul>
+<li><a href="#定义模型">定义模型</a></li>
+<li><a href="#模型配置">模型配置</a></li>
+<li><a href="#处理训练数据">处理训练数据</a></li>
+<li><a href="#训练-1">训练</a></li>
+<li><a href="#使用模型">使用模型</a></li>
+<li><a href="#预测">预测</a></li>
+<li><a href="#结果分析">结果分析</a></li>
+</ul></li>
+<li><a href="#图片预测时的结果截图">图片预测时的结果截图</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><strong>摘要：</strong> 本文利用马或人的图片数据来训练模型，让模型经过训练后具备识别新的图片中是含有马或者人，从而达到自动识别（recognition）。</p>
+
+<h1 id="训练背景">训练背景</h1>
+
+<h2 id="数据集">数据集</h2>
+
+<p>下载地址：<a href="https://storage.googleapis.com/laurencemoroney-blog.appspot.com/horse-or-human.zip">https://storage.googleapis.com/laurencemoroney-blog.appspot.com/horse-or-human.zip</a>
+说明：数据集包含了名为horse和human两个文件夹，包含了两种图片，分别是马和人的图片，每种图片大约500张，每个图片大小是300*300，每个像素的取值为3byte,即真彩色图片2的24次方的取值范围，图片如：</p>
+
+<p><img src="../../img/horse02-0.png" alt="" /><img src="../../img/human01-00.png" alt="" /></p>
+
+<h2 id="训练过程">训练过程</h2>
+
+<p>通过使用马和人的图片来训练模型，让模型知道马是什么样子的，人是什么样子的，训练完成后，我们从晚上可以搜索新的马和人的照片，输入给模型，看看模型的预测结果。</p>
+
+<h1 id="数据准备过程">数据准备过程</h1>
+
+<h2 id="下载数据">下载数据</h2>
+
+<p>可以使用wget 命令将数据下载至临时目录下
+wget <a href="https://storage.googleapis.com/laurencemoroney-blog.appspot.com/horse-or-human.zip">https://storage.googleapis.com/laurencemoroney-blog.appspot.com/horse-or-human.zip</a> /tmp/horse-or-human.zip</p>
+
+<p>windows系统可以直接使用浏览器下载并保存合适的位置。</p>
+
+<h2 id="解压数据">解压数据</h2>
+
+<p>因为数据集是zip格式的压缩包，需要对其进行解压，所以要用到访问系统文件系统和解压程序，因此需要导入os和zipfile两个库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="c1">#给出压缩包具体的路径，解压到horse-or-human目录下</span>
+<span class="n">local_zip</span> <span class="o">=</span> <span class="s1">&#39;/tmp/horse-or-human.zip&#39;</span>
+<span class="n">zip_ref</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">local_zip</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s1">&#39;/tmp/horse-or-human&#39;</span><span class="p">)</span>
+<span class="n">zip_ref</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="组织数据">组织数据</h2>
+
+<p>在上述的数据中在horse-or-human文件夹中包含了horse、human两个子文件夹，但是每个子文件夹分别包含数百张horse或者human的图片，但是并针对于单个图片而言，并没有label信息，这一点是和其他数据集有不同的地方，如在fashion mnist数据集中，28*28的图片数据是T桖还是靴子，都已经在数据集中标记了。</p>
+
+<p>所以，我们需要为该数据集标记label。ImageGenerator可以帮我们完成这个动作，ImageGenerator通过读取单个图片的文件名来标记图片是horse还是human(文件名都是以horse或human开头的)。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># horse图片数据 训练文件所在路径</span>
+<span class="n">train_horse_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;/tmp/horse-or-human/horses&#39;</span><span class="p">)</span>
+<span class="c1"># human图片数据 训练文件所在路径</span>
+<span class="n">train_human_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;/tmp/horse-or-human/humans&#39;</span><span class="p">)</span>
+<span class="c1"># 查看训练集中前十个图片数据的文件名</span>
+<span class="n">train_horse_names</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">train_horse_dir</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">train_horse_names</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">train_human_names</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">train_human_dir</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">train_human_names</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>#确认图片数据训练样本的文件名特性</p>
+
+<p>[&lsquo;horse39-3.png&rsquo;, &lsquo;horse02-9.png&rsquo;, &lsquo;horse32-3.png&rsquo;, &lsquo;horse06-9.png&rsquo;, &lsquo;horse29-1.png&rsquo;, &lsquo;horse33-5.png&rsquo;, &lsquo;horse35-1.png&rsquo;, &lsquo;horse41-9.png&rsquo;, &lsquo;horse37-0.png&rsquo;, &lsquo;horse27-2.png&rsquo;]</p>
+
+<p>[&lsquo;human12-25.png&rsquo;, &lsquo;human15-10.png&rsquo;, &lsquo;human13-10.png&rsquo;, &lsquo;human16-26.png&rsquo;, &lsquo;human10-15.png&rsquo;, &lsquo;human08-14.png&rsquo;, &lsquo;human10-10.png&rsquo;, &lsquo;human04-13.png&rsquo;, &lsquo;human06-26.png&rsquo;, &lsquo;human16-09.png&rsquo;]</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#确认一下每种图片的数量</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;total training horse images:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">train_horse_dir</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;total training human images:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">train_human_dir</span><span class="p">)))</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>#打印结果，可以看到horse 500张，human 527张</p>
+
+<p>total training horse images: 500</p>
+
+<p>total training human images: 527</p>
+</blockquote>
+
+<h2 id="检查数据">检查数据</h2>
+
+<p>为了更好的做好训练，必须要懂数据，反复地考虑如何使用数据特性、数据特征。我们可以直接去文件夹查看数据，也可以通过画图来显示数据。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#导入绘图所用到的库</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.image</span> <span class="kn">as</span> <span class="nn">mpimg</span>
+
+<span class="c1">#使用一个4*4的画板</span>
+<span class="n">nrows</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">ncols</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># 定义一个索引</span>
+<span class="n">pic_index</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># 初始化一个4*4大小的画布</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="n">ncols</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="n">nrows</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="n">pic_index</span> <span class="o">+=</span> <span class="mi">8</span>
+<span class="n">horse和human图片的全路径</span>
+<span class="n">next_horse_pix</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_horse_dir</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">train_horse_names</span><span class="p">[</span><span class="n">pic_index</span><span class="o">-</span><span class="mi">8</span><span class="p">:</span><span class="n">pic_index</span><span class="p">]]</span>
+<span class="n">next_human_pix</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_human_dir</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">train_human_names</span><span class="p">[</span><span class="n">pic_index</span><span class="o">-</span><span class="mi">8</span><span class="p">:</span><span class="n">pic_index</span><span class="p">]]</span>
+<span class="c1">#绘图</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">img_path</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">next_horse_pix</span><span class="o">+</span><span class="n">next_human_pix</span><span class="p">):</span>
+  <span class="c1"># Set up subplot; subplot indices start at 1</span>
+  <span class="n">sp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="c1">#不显示坐标轴</span>
+  <span class="n">sp</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;Off&#39;</span><span class="p">)</span> <span class="c1"># Don&#39;t show axes (or gridlines)</span>
+  <span class="c1"># 读取目录所对应的图片</span>
+  <span class="n">img</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>horse 和 human的样本数据如下图</p>
+
+<p><img src="../../img/4-4.png" alt="" /></p>
+</blockquote>
+
+<h1 id="训练">训练</h1>
+
+<h2 id="定义模型">定义模型</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="c1">#使用序列化Sequential模型，使用卷积层</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+    <span class="c1"># 由于训练的图片数据的大小是300*300，且颜色取值3个字节，所以input_shape就</span>
+    <span class="c1"># 是（300，300，3）</span>
+    <span class="c1"># 激活函数使用relu，实现稀疏后的模型能够更好地挖掘相关特征，后面详细介绍</span>
+    <span class="c1"># 选择3*3大小滤镜（filter）去扫描图片数据</span>
+
+    <span class="c1"># 第一层卷积神经网络</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
+    <span class="c1"># 使用MaxPooling2D 2*2的滤镜扫描，取得4个数值的最大值，目的是不损失特征的情况</span>
+    <span class="c1">#下压缩数据，还具有防止过拟合的作用</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="c1"># 第二层卷积神经网络</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+    <span class="c1"># 第三层卷积神经网络</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+    <span class="c1"># 第四层卷积神经网络</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+    <span class="c1"># 第五层卷积神经网络</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+    <span class="c1"># 使得数据按照一定顺序规则成为1维数值或者向量，在喂给全连接的神经网络层</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(),</span>
+    <span class="c1"># 具有512个神经元的隐藏层</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+    <span class="c1"># 只有一个用于输出的神经元，它的值将是0或者1,0代表horse,1代表human</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)</span>
+<span class="p">])</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="模型配置">模型配置</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers</span> <span class="kn">import</span> <span class="n">RMSprop</span>
+<span class="c1">#由于是个二分类的问题，一般选用交叉熵代价函数或者损失函数</span>
+<span class="c1">#学习速度（learning rate, lr）为0.001</span>
+<span class="c1">#使用accuracy(acc)准确度来度量</span>
+<span class="n">model</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span>
+              <span class="n">optimizer</span><span class="o">=</span><span class="n">RMSprop</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">),</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;acc&#39;</span><span class="p">])</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="处理训练数据">处理训练数据</h2>
+
+<p>给待训练的图片数据样本，使用上面介绍的ImageDataGenerator增加label，以便于模型进行训练。horse的label是0， human的label是1，并且为了便于计算，对图片数据进行归一化处理，也就是rescale。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">tensorflow.keras.preprocessing.image</span> <span class="kn">import</span> <span class="n">ImageDataGenerator</span>
+
+<span class="c1"># 所有图片像素点都被除以255，让数值回到0-1区间，便于计算</span>
+<span class="n">train_datagen</span> <span class="o">=</span> <span class="n">ImageDataGenerator</span><span class="p">(</span><span class="n">rescale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">255</span><span class="p">)</span>
+<span class="c1"># 使用train_datagen 产生 128批量的图片训练流</span>
+<span class="n">train_generator</span> <span class="o">=</span> <span class="n">train_datagen</span><span class="o">.</span><span class="n">flow_from_directory</span><span class="p">(</span>
+        <span class="s1">&#39;/tmp/horse-or-human/&#39;</span><span class="p">,</span>  <span class="c1"># 训练数据所在目录 images</span>
+        <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span>  <span class="c1">#</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>          <span class="c1"># 每次批量128个</span>
+        <span class="c1"># 由于使用交叉熵代价函数或者叫损失函数，是个二分类的问题</span>
+        <span class="n">class_mode</span><span class="o">=</span><span class="s1">&#39;binary&#39;</span><span class="p">)</span>    </code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="训练-1">训练</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit_generator</span><span class="p">(</span>
+      <span class="n">train_generator</span><span class="p">,</span>
+      <span class="n">steps_per_epoch</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>  
+      <span class="n">epochs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+      <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>训练结果如下:</p>
+
+<p>Epoch <sup>1</sup>&frasl;<sub>15</sub>
+<sup>9</sup>&frasl;<sub>9</sub> [==============================] - 8s 938ms/step - loss: 0.9263 - acc: 0.4985
+Epoch <sup>2</sup>&frasl;<sub>15</sub>
+<sup>9</sup>&frasl;<sub>9</sub> [==============================] - 7s 769ms/step - loss: 0.7288 - acc: 0.5696
+Epoch <sup>3</sup>&frasl;<sub>15</sub>
+<sup>9</sup>&frasl;<sub>9</sub> [==============================] - 8s 840ms/step - loss: 0.6819 - acc: 0.8189
+Epoch <sup>4</sup>&frasl;<sub>15</sub>
+<sup>9</sup>&frasl;<sub>9</sub> [==============================] - 7s 725ms/step - loss: 0.3804 - acc: 0.8296
+Epoch <sup>5</sup>&frasl;<sub>15</sub>
+<sup>9</sup>&frasl;<sub>9</sub> [==============================] - 7s 734ms/step - loss: 0.6457 - acc: 0.8179
+Epoch <sup>6</sup>&frasl;<sub>15</sub>
+<sup>9</sup>&frasl;<sub>9</sub> [==============================] - 7s 745ms/step - loss: 0.2520 - acc: 0.8812
+Epoch <sup>7</sup>&frasl;<sub>15</sub>
+<sup>9</sup>&frasl;<sub>9</sub> [==============================] - 7s 733ms/step - loss: 0.4631 - acc: 0.8345
+Epoch <sup>8</sup>&frasl;<sub>15</sub>
+<sup>9</sup>&frasl;<sub>9</sub> [==============================] - 7s 730ms/step - loss: 0.1801 - acc: 0.9241
+Epoch <sup>9</sup>&frasl;<sub>15</sub>
+<sup>9</sup>&frasl;<sub>9</sub> [==============================] - 7s 748ms/step - loss: 1.0966 - acc: 0.8549
+Epoch <sup>10</sup>&frasl;<sub>15</sub>
+<sup>9</sup>&frasl;<sub>9</sub> [==============================] - 7s 729ms/step - loss: 0.3123 - acc: 0.8919
+Epoch <sup>11</sup>&frasl;<sub>15</sub>
+<sup>9</sup>&frasl;<sub>9</sub> [==============================] - 7s 730ms/step - loss: 0.3674 - acc: 0.8744
+Epoch <sup>12</sup>&frasl;<sub>15</sub>
+<sup>9</sup>&frasl;<sub>9</sub> [==============================] - 7s 747ms/step - loss: 0.1424 - acc: 0.9494
+Epoch <sup>13</sup>&frasl;<sub>15</sub>
+<sup>9</sup>&frasl;<sub>9</sub> [==============================] - 7s 732ms/step - loss: 0.4181 - acc: 0.9182
+Epoch <sup>14</sup>&frasl;<sub>15</sub>
+<sup>9</sup>&frasl;<sub>9</sub> [==============================] - 8s 834ms/step - loss: 0.2235 - acc: 0.9289
+Epoch <sup>15</sup>&frasl;<sub>15</sub>
+<sup>9</sup>&frasl;<sub>9</sub> [==============================] - 8s 835ms/step - loss: 0.0485 - acc: 0.9796</p>
+</blockquote>
+
+<p><strong>可以看出，单从loss和acc上来看，效果还是很不错</strong></p>
+
+<h2 id="使用模型">使用模型</h2>
+
+<p>我们试图从网上随便找几个图片中含有马或者人的图片，输入给模型，看看模型能否识别正确。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">files</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing</span> <span class="kn">import</span> <span class="n">image</span>
+
+<span class="n">uploaded</span> <span class="o">=</span> <span class="n">files</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">uploaded</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+
+  <span class="c1"># predicting images</span>
+  <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/content/&#39;</span> <span class="o">+</span> <span class="n">fn</span>
+  <span class="n">img</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">load_img</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">img_to_array</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+  <span class="n">images</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">x</span><span class="p">])</span>
+  <span class="c1">#预测</span>
+  <span class="n">classes</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">classes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+  <span class="k">if</span> <span class="n">classes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.5</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">fn</span> <span class="o">+</span> <span class="s2">&#34; is a human&#34;</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">fn</span> <span class="o">+</span> <span class="s2">&#34; is a horse&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="预测">预测</h2>
+
+<p>我们使用上述的程序对以下来源于网络的五个图片进行预测，五个图片截图如下：</p>
+
+<p><img src="../../img/36017290428311444.png" alt="1" /></p>
+
+<p>程序运行后，要求输入图片 <img src="../../img/1740120289126137.png" alt="4" /></p>
+
+<p>分别看看分别输入五个图片时的预测结果，如下所示</p>
+
+<p><img src="../../img/ma1.jpg" alt="1" />     结果： ma1.jpg is a horse</p>
+
+<p><img src="../../img/ma2.jpg" alt="2" />     结果：ma2.jpg is a horse</p>
+
+<p><img src="../../img/ren1.png" alt="3" />    结果：ren1.png is a human</p>
+
+<p><img src="../../img/ren2.png" alt="4" />    结果: ren2.png is a human</p>
+
+<p><img src="../../img/ren3.jpg" alt="4" />    结果: <strong>ren3.jpg is a horse</strong></p>
+
+<h2 id="结果分析">结果分析</h2>
+
+<ul>
+<li><p>可以看到总共预测了五个图片，前四个图片预测正确，第五个错误human预测成horse。</p></li>
+
+<li><p>第五个图片错了，是因为该图片中有两个人，而训练数据里没有该类特性的数据，因为结果错误。</p></li>
+
+<li><p>如果除去第五个不按套路出牌的图片，基本上全对了。</p></li>
+
+<li><p>卷积神经网络对特征提取非常有用。</p></li>
+</ul>
+
+<h1 id="图片预测时的结果截图">图片预测时的结果截图</h1>
+
+<p><img src="../../img/20190508230311.png" alt="ma1" /></p>
+
+<p><img src="../../img/360182004224810596.png" alt="ma2" /></p>
+
+<p><img src="../../img/36017001014709086.png" alt="ren1" /></p>
+
+<p><img src="../../img/360184307017911459.png" alt="ren2" /></p>
+
+<p><img src="../../img/36016720403102100135.png" alt="ren3" /></p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">海萨</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-05-08
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content">MIT</span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="../../img/reward/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+          <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">神经网络</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/tf2/201905012-cnn/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">[深度学习] 什么是卷积神经网络</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/20190505-tf2-fashionmnist/">
+            <span class="next-text nav-default">[Tensorflow2.0] 计算机视觉入门 - Fashion Mnist</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:navyup@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://github.com/navyup" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://www.shakebyte.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 -
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy;
+    2018 -
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">海 萨</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

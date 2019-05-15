@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数据处理 on Bring A Big Idea to You</title>
+    <link>http://www.shakebyte.com/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/</link>
+    <description>Recent content in 数据处理 on Bring A Big Idea to You</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>海 萨</copyright>
+    <lastBuildDate>Tue, 14 May 2019 18:18:53 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.shakebyte.com/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[数据处理] HinetPy开源软件-日本地震波形数据</title>
+      <link>http://www.shakebyte.com/post/os/20190514-hinetpy-intro/</link>
+      <pubDate>Tue, 14 May 2019 18:18:53 -0500</pubDate>
+      
+      <guid>http://www.shakebyte.com/post/os/20190514-hinetpy-intro/</guid>
+      <description>&lt;p&gt;HinetPy 是一个用于从日本 NIED Hi-net 网站下载地震波形数据并进行数据格式转换的Python模块。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
