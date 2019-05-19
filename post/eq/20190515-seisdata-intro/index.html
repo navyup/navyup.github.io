@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[数据处理] 地震数据及相关软件概述 - Bring A Big Idea to You</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="海萨" /><meta name="description" content="" /><meta name="keywords" content="地震数据, 波形数据" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.5 with even 4.0.0" />
+
+
+<link rel="canonical" href="http://www.shakebyte.com/post/eq/20190515-seisdata-intro/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[数据处理] 地震数据及相关软件概述" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.shakebyte.com/post/eq/20190515-seisdata-intro/" />
+<meta property="article:published_time" content="2019-05-15T16:00:05-05:00"/>
+<meta property="article:modified_time" content="2019-05-15T16:00:05-05:00"/>
+
+<meta itemprop="name" content="[数据处理] 地震数据及相关软件概述">
+<meta itemprop="description" content="">
+
+
+<meta itemprop="datePublished" content="2019-05-15T16:00:05-05:00" />
+<meta itemprop="dateModified" content="2019-05-15T16:00:05-05:00" />
+<meta itemprop="wordCount" content="1964">
+
+
+
+<meta itemprop="keywords" content="数据处理," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[数据处理] 地震数据及相关软件概述"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ShakeByte</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ShakeByte</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">[数据处理] 地震数据及相关软件概述</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-05-15 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/"> 数据处理 </a>
+            </div>
+          <span class="more-meta"> 约 1964 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#一-地震数据">一、地震数据</a>
+<ul>
+<li><a href="#1-1-地震目录">1.1 地震目录</a></li>
+<li><a href="#1-2-地震波形数据">1.2 地震波形数据</a></li>
+</ul></li>
+<li><a href="#二-地震学相关领域的软件集合">二、地震学相关领域的软件集合</a>
+<ul>
+<li><a href="#2-1-地震波形数据下载工具">2.1 地震波形数据下载工具</a></li>
+<li><a href="#2-2-常见波形数据处理软件">2.2 常见波形数据处理软件</a></li>
+<li><a href="#tips-相关标准与函数库">Tips：相关标准与函数库</a></li>
+<li><a href="#2-3-地震模拟">2.3 地震模拟</a></li>
+<li><a href="#2-4-地震检测与去重分析">2.4 地震检测与去重分析</a></li>
+<li><a href="#2-5-震相拾取">2.5 震相拾取</a></li>
+<li><a href="#2-6-特定场景应用软件">2.6 特定场景应用软件</a></li>
+</ul></li>
+<li><a href="#噪声成像">噪声成像</a></li>
+<li><a href="#修订历史">修订历史</a></li>
+<li><a href="#声明">声明</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="一-地震数据">一、地震数据</h1>
+
+<p>地震数据主要包含<code>地震目录（catalog）、地震波形数据(waveform)</code>两大类。用于描述地震数据的元数据，如台网信息、台站信息、仪器信息等附加信息不在本文的讨论范围。</p>
+
+<h2 id="1-1-地震目录">1.1 地震目录</h2>
+
+<p>地震目录，是描述地震发生的三要素，即震级大小、时间和地点。不同的地区或者台网发布的地震目录是有差别的。常用到的地震目录主要由<code>国际地震中心（ISC）、美国USGS、美国IRIS和国家地震科学数据共享中心</code>等发布。</p>
+
+<blockquote>
+<p><strong>常见地震目录发布地址</strong></p>
+
+<ul>
+<li><p>ISC</p>
+
+<ul>
+<li>ISC Bulletin  <a href="http://www.isc.ac.uk/iscbulletin/search/">http://www.isc.ac.uk/iscbulletin/search/</a></li>
+<li>ISC-GEM Catalogue 包含经过人工重新检查和确定的包含(1904 - 2015) 5级以上的地震目录，专为地震灾害和风险模型特定用户群体改善而来 <a href="http://www.isc.ac.uk/iscgem/">http://www.isc.ac.uk/iscgem/</a></li>
+<li>ISC-EHB Bulletin <a href="http://www.isc.ac.uk/isc-ehb/">http://www.isc.ac.uk/isc-ehb/</a></li>
+</ul></li>
+
+<li><p>USGS  <a href="https://earthquake.usgs.gov/earthquakes/search/">https://earthquake.usgs.gov/earthquakes/search/</a></p></li>
+
+<li><p>IRIS <a href="http://ds.iris.edu/wilber3/find_event">http://ds.iris.edu/wilber3/find_event</a></p></li>
+
+<li><p>国内</p>
+
+<ul>
+<li>国家地震科学数据共享中心 <a href="http://data.earthquake.cn/">http://data.earthquake.cn/</a></li>
+</ul></li>
+</ul>
+</blockquote>
+
+<h2 id="1-2-地震波形数据">1.2 地震波形数据</h2>
+
+<p>地震波形数据也叫<code>波形数据</code>，通常分为<code>事件波形</code>数据和<code>连续波形</code>数据。事件波形数据从根据地震目录提供的参数从连续波形数据中提取的和地震事件相关的数据，即事件波形数据是连续波形数据的子集。</p>
+
+<p>当需要获取波形数据时，通常需要准备几个参数，即<code>感兴趣区域或范围或具体台站、时间段或哪次地震事件、震级大小、震源深度等</code>。使用这些具体参数来组合选取感兴趣的波形数据。</p>
+
+<blockquote>
+<p><strong>常见地震波形数据源</strong></p>
+
+<ul>
+<li><p>IRIS <a href="https://ds.iris.edu/ds/nodes/dmc/data/">https://ds.iris.edu/ds/nodes/dmc/data/</a></p></li>
+
+<li><p>USGS <a href="https://earthquake.usgs.gov/data/">https://earthquake.usgs.gov/data/</a></p></li>
+
+<li><p>Hi-Net  <a href="http://www.hinet.bosai.go.jp/">http://www.hinet.bosai.go.jp/</a></p></li>
+
+<li><p>国家地震科学数据共享中心 <a href="http://data.earthquake.cn/">http://data.earthquake.cn/</a></p></li>
+</ul>
+</blockquote>
+
+<hr />
+
+<h1 id="二-地震学相关领域的软件集合">二、地震学相关领域的软件集合</h1>
+
+<h2 id="2-1-地震波形数据下载工具">2.1 地震波形数据下载工具</h2>
+
+<ol>
+<li><p>Wilber：中国国家测震数据备份中心数据申请平台，由中国地震局地球研究所提供支持。<a href="http://www.seisdmc.ac.cn">官方网站</a></p></li>
+
+<li><p>IRIS Wilber3: 通过网页界面下载单个地震事件的波形数据。<a href="http://ds.iris.edu/wilber3/find_event">波形数据申请页面</a> | <a href="http://service.iris.edu/">IRIS数据服务总览</a></p></li>
+
+<li><p>BREQ_FAST: 发邮件给IRIS指定邮箱申请数据。特别适合写脚本自动生成 邮件内容、自动发送邮件、自动下载数据。其优点是简单易用，易于自动化；速度快，不受网速限制；从申请到下载可以完全脚本化，适合数据批量申请。<a href="http://ds.iris.edu/ds/nodes/dmc/manuals/breq_fast/">详细说明</a></p></li>
+
+<li><p>HinetPy: 基于python开发的从日本Hinet下载高质量波形数据的软件。<a href="https://github.com/seisman/HinetPy">软件下载</a> | <a href="https://seisman.github.io/HinetPy/zh_CN/">中文文档</a></p></li>
+
+<li><p>SOD: 用 Java 实现的地震数据下载工具。<a href="http://www.seis.sc.edu/sod/">软件下载</a></p></li>
+
+<li><p>ObsPy: 基于 Python 的地震学数据获取、处理、绘图工具。<a href="https://github.com/obspy/obspy/wiki">软件下载</a></p></li>
+
+<li><p>Web Service Fetch scripts: 从IRIS获取波形数据的Perl脚本。 <a href="https://seiscode.iris.washington.edu/projects/ws-fetch-scripts">软件下载</a></p></li>
+
+<li><p>jweed: 用 Java 实现的 IRIS 数据申请客户端。<a href="http://ds.iris.edu/ds/nodes/dmc/software/downloads/jweed/">软件下载</a></p></li>
+
+<li><p>HinetPy: 从日本Hinet官方下载数据的Python模块。<a href="https://seisman.github.io/HinetPy/">软件下载</a></p></li>
+</ol>
+
+<h2 id="2-2-常见波形数据处理软件">2.2 常见波形数据处理软件</h2>
+
+<ol>
+<li><p>SAC: 地震学数据处理的常用软件，有SAC/SAC2000两个版本，目前主要有IRIS维护。<a href="http://ds.iris.edu/ds/nodes/dmc/forms/sac/">软件下载</a> | <a href="https://seisman.github.io/SAC_Docs_zh/data-process/">中文文档</a></p></li>
+
+<li><p>rdseed：是 IRIS 提供的工具，用于读取 SEED 或MiniSeed格式，并将波形数据可以转换为 SAC、AH、CSS、SEGY 或 ASCII 等多种数据格式。<a href="http://ds.iris.edu/ds/nodes/dmc/software/downloads/">软件下载</a></p></li>
+
+<li><p>ObsPy: 基于 Python 的地震学数据获取、处理、绘图工具，也可以做格式转换。 <a href="https://github.com/obspy/obspy/wiki">软件下载</a></p></li>
+
+<li><p>mseed2sac：将 miniSEED 文件转换为 SAC 格式。<a href="https://github.com/iris-edu/mseed2sac">软件下载</a></p></li>
+
+<li><p>GISMO: 是基于matlab的地震数据分析工具箱。GISMO提供了一个框架，可以加快围绕地震波形/轨迹数据、事件目录数据和仪器响应构建研究代码的开发时间。GISMO可以从IRIS DMC、SAC &amp; Seisan文件、Antelope数据库、ZMAP和CORAL格式导入数据、绘图工具。几行编码，就可以导入其他格式。<a href="http://geoscience-community-codes.github.io/GISMO/">软件介绍、教程、下载</a></p></li>
+
+<li><p>SeisIO.jl: 基于 Julia 的地震学数据获取、处理、绘图工具 <a href="https://github.com/jpjones76/SeisIO.jl">软件下载</a></p></li>
+
+<li><p>CPS330: GSAC, 理论地震图，接收函数，面波频散。<a href="http://www.eas.slu.edu/eqc/eqccps.html">软件下载</a></p></li>
+</ol>
+
+<blockquote>
+<h2 id="tips-相关标准与函数库">Tips：相关标准与函数库</h2>
+
+<ul>
+<li>1. libmseed ：提供了一个miniseed数据记录的框架，是一种常用的地震时间序列和相关数据的格式。除了从多个记录重建时间序列之外，该库还包括读取和写入数据记录的功能，可跨平台工作。<a href="https://github.com/iris-edu/libmseed">软件链接</a></li>
+<li>2. SEED 国际地震波形数据交换标准。<a href="http://www.fdsn.org/pdf/SEEDManual_V2.4.pdf">标准下载</a></li>
+</ul>
+</blockquote>
+
+<h2 id="2-3-地震模拟">2.3 地震模拟</h2>
+
+<ol>
+<li>AWP-ODC：大型三维科学地震模拟软件，包含强地面运动数值模拟、动态破裂模拟、地面运动反演。</li>
+</ol>
+
+<h2 id="2-4-地震检测与去重分析">2.4 地震检测与去重分析</h2>
+
+<ol>
+<li><p>EQcorrscan: 基于python开发的检测和分析地震或者重复地震的软件包</p></li>
+
+<li><p>FastMatchedFilter: 一个高效的地震匹配滤波器搜索CPU和GPU架构。<a href="https://github.com/beridel/fast_matched_filter">软件链接</a>|<a href="https://ebeauce.github.io/FMF_documentation/">文档链接</a></p></li>
+
+<li><p>REDPy：是一种基于python开发用于在连续数据中自动检测和分析重复地震的工具。<a href="https://github.com/ahotovec/REDPy">软件链接</a></p></li>
+</ol>
+
+<h2 id="2-5-震相拾取">2.5 震相拾取</h2>
+
+<p>PhasePApy: Python 写的震相拾取软件包
+astack: 自适应迭代以实现震相对齐
+CrazySeismic_Pick: 多通道相关实现震相对齐</p>
+
+<h2 id="2-6-特定场景应用软件">2.6 特定场景应用软件</h2>
+
+<ol>
+<li><p>H/V ：基于PyQt4/mtspec/ObsPy编写简易计算HVSR程序</p></li>
+
+<li><p>distaz: 给定震中和台站经纬度，计算震中距、方位角和反方位角的经典代码。</p></li>
+
+<li><p>DigitSeis: 利用图像处理技术将模拟地震仪记录到的波形图片转换成数字信号（Matlab）</p></li>
+
+<li><p>CitcomS: 求解地幔可压缩热动力学对流问题的有限元代码</p></li>
+
+<li><p>AFAT: 根据 Cijkl 计算各向异性介质不同方向的速度</p></li>
+
+<li><p>SHTOOLS: 实现球谐相关操作，包括变换、重建、旋转、谱分析等。</p></li>
+</ol>
+
+<h1 id="噪声成像">噪声成像</h1>
+
+<ol>
+<li><p>MSNoise: 基于ObsPy利用地震背景噪声检测地下速度结构变化 <a href="http://www.msnoise.org/">软件链接</a></p></li>
+
+<li><p>seismic-noise-tomography: 基于ObsPy，噪声面波成像 <a href="https://github.com/bgoutorbe/seismic-noise-tomography">软件链接</a></p></li>
+</ol>
+
+<h1 id="修订历史">修订历史</h1>
+
+<p>首次整理时间：2019年5月15日
+第二次修订：正在整理中······</p>
+
+<h1 id="声明">声明</h1>
+
+<p><strong>本文材料来源于互联网，以及本人在地震行业从业十年的理解。编写本篇的目的是为了给刚从事地震相关领域研究的专业技术人员一个总体概览，从而为行业打造地震开源软件生态增砖添瓦。</strong></p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">海萨</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-05-15
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content">MIT</span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="../../img/reward/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">数据处理</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/os/20190514-hinetpy-intro/">
+            <span class="next-text nav-default">[数据处理] HinetPy开源软件-日本地震波形数据</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:navyup@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://github.com/navyup" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://www.shakebyte.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 -
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy;
+    2018 -
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">海 萨</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

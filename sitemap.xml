@@ -10,25 +10,44 @@
   
   <url>
     <loc>http://www.shakebyte.com/</loc>
-    <lastmod>2019-05-14T18:18:53-05:00</lastmod>
+    <lastmod>2019-05-15T16:00:05-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://www.shakebyte.com/categories/</loc>
-    <lastmod>2019-05-14T18:18:53-05:00</lastmod>
+    <lastmod>2019-05-15T16:00:05-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://www.shakebyte.com/post/</loc>
-    <lastmod>2019-05-14T18:18:53-05:00</lastmod>
+    <lastmod>2019-05-15T16:00:05-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://www.shakebyte.com/tags/</loc>
-    <lastmod>2019-05-14T18:18:53-05:00</lastmod>
+    <lastmod>2019-05-15T16:00:05-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.shakebyte.com/post/eq/20190515-seisdata-intro/</loc>
+    <lastmod>2019-05-15T16:00:05-05:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.shakebyte.com/categories/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/</loc>
+    <lastmod>2019-05-15T16:00:05-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.shakebyte.com/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/</loc>
+    <lastmod>2019-05-15T16:00:05-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -47,12 +66,6 @@
   
   <url>
     <loc>http://www.shakebyte.com/tags/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/</loc>
-    <lastmod>2019-05-14T18:18:53-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.shakebyte.com/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/</loc>
     <lastmod>2019-05-14T18:18:53-05:00</lastmod>
     <priority>0</priority>
   </url>
@@ -119,12 +132,6 @@
     <lastmod>2019-05-04T19:32:34-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.shakebyte.com/categories/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/</loc>
-    <lastmod>2019-05-04T19:32:34-05:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

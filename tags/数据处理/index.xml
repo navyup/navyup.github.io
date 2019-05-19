@@ -5,12 +5,21 @@
     <link>http://www.shakebyte.com/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/</link>
     <description>Recent content in 数据处理 on Bring A Big Idea to You</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>zh-CN</language>
     <copyright>海 萨</copyright>
-    <lastBuildDate>Tue, 14 May 2019 18:18:53 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 15 May 2019 16:00:05 -0500</lastBuildDate>
     
 	<atom:link href="http://www.shakebyte.com/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[数据处理] 地震数据及相关软件概述</title>
+      <link>http://www.shakebyte.com/post/eq/20190515-seisdata-intro/</link>
+      <pubDate>Wed, 15 May 2019 16:00:05 -0500</pubDate>
+      
+      <guid>http://www.shakebyte.com/post/eq/20190515-seisdata-intro/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>[数据处理] HinetPy开源软件-日本地震波形数据</title>
