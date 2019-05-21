@@ -25,10 +25,10 @@ It makes use of a variety of open source projects including:
     
     <item>
       <title>[系统管理] ubuntu 16.04LTS平滑升级至18.04</title>
-      <link>http://www.shakebyte.com/post/dc/20190521_ubantu/</link>
+      <link>http://www.shakebyte.com/post/dc/20190521_ubuntu/</link>
       <pubDate>Tue, 21 May 2019 09:55:15 -0500</pubDate>
       
-      <guid>http://www.shakebyte.com/post/dc/20190521_ubantu/</guid>
+      <guid>http://www.shakebyte.com/post/dc/20190521_ubuntu/</guid>
       <description>升级背景 近日，计划使用AWS主机安装jupyter时发现，主机操作系统版本是ubuntu 16.04LTS，无论如何更新Python3只能停留</description>
     </item>
     
