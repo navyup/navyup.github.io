@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>系统管理 on Bring A Big Idea to You</title>
+    <link>http://www.shakebyte.com/tags/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/</link>
+    <description>Recent content in 系统管理 on Bring A Big Idea to You</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>ShakeByte</copyright>
+    <lastBuildDate>Tue, 21 May 2019 09:55:15 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.shakebyte.com/tags/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[系统管理] ubuntu 16.04LTS平滑升级至18.04</title>
+      <link>http://www.shakebyte.com/post/dc/20190521_ubantu/</link>
+      <pubDate>Tue, 21 May 2019 09:55:15 -0500</pubDate>
+      
+      <guid>http://www.shakebyte.com/post/dc/20190521_ubantu/</guid>
+      <description>升级背景 近日，计划使用AWS主机安装jupyter时发现，主机操作系统版本是ubuntu 16.04LTS，无论如何更新Python3只能停留</description>
+    </item>
+    
+  </channel>
+</rss>

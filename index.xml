@@ -6,8 +6,8 @@
     <description>Recent content on Bring A Big Idea to You</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <copyright>海 萨</copyright>
-    <lastBuildDate>Wed, 15 May 2019 16:00:05 -0500</lastBuildDate>
+    <copyright>ShakeByte</copyright>
+    <lastBuildDate>Tue, 21 May 2019 09:55:15 -0500</lastBuildDate>
     
 	<atom:link href="http://www.shakebyte.com/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,9 +18,18 @@
       <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
       
       <guid>http://www.shakebyte.com/about/</guid>
-      <description>ShakeByte is a knowledge-delivering site about Information Science.
+      <description>ShakeByte is a knowledge-delivering site about Information Science in Seismology.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>[系统管理] ubuntu 16.04LTS平滑升级至18.04</title>
+      <link>http://www.shakebyte.com/post/dc/20190521_ubantu/</link>
+      <pubDate>Tue, 21 May 2019 09:55:15 -0500</pubDate>
+      
+      <guid>http://www.shakebyte.com/post/dc/20190521_ubantu/</guid>
+      <description>升级背景 近日，计划使用AWS主机安装jupyter时发现，主机操作系统版本是ubuntu 16.04LTS，无论如何更新Python3只能停留</description>
     </item>
     
     <item>

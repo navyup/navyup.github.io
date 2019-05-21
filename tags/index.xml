@@ -6,11 +6,20 @@
     <description>Recent content in Tags on Bring A Big Idea to You</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <copyright>海 萨</copyright>
-    <lastBuildDate>Wed, 15 May 2019 16:00:05 -0500</lastBuildDate>
+    <copyright>ShakeByte</copyright>
+    <lastBuildDate>Tue, 21 May 2019 09:55:15 -0500</lastBuildDate>
     
 	<atom:link href="http://www.shakebyte.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>系统管理</title>
+      <link>http://www.shakebyte.com/tags/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Tue, 21 May 2019 09:55:15 -0500</pubDate>
+      
+      <guid>http://www.shakebyte.com/tags/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>数据处理</title>
