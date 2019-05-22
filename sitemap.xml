@@ -10,30 +10,55 @@
   
   <url>
     <loc>http://www.shakebyte.com/</loc>
-    <lastmod>2019-05-21T09:55:15-05:00</lastmod>
+    <lastmod>2019-05-22T10:12:28-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://www.shakebyte.com/categories/</loc>
-    <lastmod>2019-05-21T09:55:15-05:00</lastmod>
+    <lastmod>2019-05-22T10:12:28-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://www.shakebyte.com/post/</loc>
-    <lastmod>2019-05-21T09:55:15-05:00</lastmod>
+    <lastmod>2019-05-22T10:12:28-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://www.shakebyte.com/tags/</loc>
-    <lastmod>2019-05-21T09:55:15-05:00</lastmod>
+    <lastmod>2019-05-22T10:12:28-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.shakebyte.com/post/dc/20190521_ubuntu/</loc>
+    <loc>http://www.shakebyte.com/post/python/20190522_jupyter/</loc>
+    <lastmod>2019-05-22T10:12:28-05:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.shakebyte.com/tags/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/</loc>
+    <lastmod>2019-05-22T10:12:28-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.shakebyte.com/categories/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/</loc>
+    <lastmod>2019-05-22T10:12:28-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.shakebyte.com/tags/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2019-05-22T10:12:28-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.shakebyte.com/post/python/20190521_ubuntu/</loc>
     <lastmod>2019-05-21T09:55:15-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -46,22 +71,10 @@
   </url>
   
   <url>
-    <loc>http://www.shakebyte.com/tags/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2019-05-21T09:55:15-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://www.shakebyte.com/post/eq/20190515-seisdata-intro/</loc>
     <lastmod>2019-05-15T16:00:05-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.shakebyte.com/categories/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/</loc>
-    <lastmod>2019-05-15T16:00:05-05:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -71,22 +84,16 @@
   </url>
   
   <url>
+    <loc>http://www.shakebyte.com/categories/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/</loc>
+    <lastmod>2019-05-15T16:00:05-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://www.shakebyte.com/post/os/20190514-hinetpy-intro/</loc>
     <lastmod>2019-05-14T18:18:53-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.shakebyte.com/categories/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/</loc>
-    <lastmod>2019-05-14T18:18:53-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.shakebyte.com/tags/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/</loc>
-    <lastmod>2019-05-14T18:18:53-05:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -173,13 +180,13 @@
   </url>
   
   <url>
-    <loc>http://www.shakebyte.com/categories/theme-preview/</loc>
+    <loc>http://www.shakebyte.com/tags/theme-preview/</loc>
     <lastmod>2018-07-10T00:00:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.shakebyte.com/tags/theme-preview/</loc>
+    <loc>http://www.shakebyte.com/categories/theme-preview/</loc>
     <lastmod>2018-07-10T00:00:00+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -223,13 +230,13 @@
   </url>
   
   <url>
-    <loc>http://www.shakebyte.com/categories/english/</loc>
+    <loc>http://www.shakebyte.com/tags/english/</loc>
     <lastmod>2017-08-31T15:43:48+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.shakebyte.com/tags/english/</loc>
+    <loc>http://www.shakebyte.com/categories/english/</loc>
     <lastmod>2017-08-31T15:43:48+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -261,13 +268,13 @@
   </url>
   
   <url>
-    <loc>http://www.shakebyte.com/categories/%E6%97%A5%E6%9C%AC%E8%AA%9E/</loc>
+    <loc>http://www.shakebyte.com/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/</loc>
     <lastmod>2017-08-30T01:53:34+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.shakebyte.com/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/</loc>
+    <loc>http://www.shakebyte.com/categories/%E6%97%A5%E6%9C%AC%E8%AA%9E/</loc>
     <lastmod>2017-08-30T01:53:34+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -286,13 +293,13 @@
   </url>
   
   <url>
-    <loc>http://www.shakebyte.com/categories/%E4%B8%AD%E6%96%87/</loc>
+    <loc>http://www.shakebyte.com/tags/%E4%B8%AD%E6%96%87/</loc>
     <lastmod>2017-08-30T01:37:56+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.shakebyte.com/tags/%E4%B8%AD%E6%96%87/</loc>
+    <loc>http://www.shakebyte.com/categories/%E4%B8%AD%E6%96%87/</loc>
     <lastmod>2017-08-30T01:37:56+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -305,13 +312,13 @@
   </url>
   
   <url>
-    <loc>http://www.shakebyte.com/categories/shortcodes/</loc>
+    <loc>http://www.shakebyte.com/tags/shortcodes/</loc>
     <lastmod>2018-02-01T18:01:23+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.shakebyte.com/tags/shortcodes/</loc>
+    <loc>http://www.shakebyte.com/categories/shortcodes/</loc>
     <lastmod>2018-02-01T18:01:23+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -331,13 +338,13 @@
   </url>
   
   <url>
-    <loc>http://www.shakebyte.com/categories/syntax-highlighting/</loc>
+    <loc>http://www.shakebyte.com/tags/syntax-highlighting/</loc>
     <lastmod>2018-11-05T16:01:23+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.shakebyte.com/tags/syntax-highlighting/</loc>
+    <loc>http://www.shakebyte.com/categories/syntax-highlighting/</loc>
     <lastmod>2018-11-05T16:01:23+08:00</lastmod>
     <priority>0</priority>
   </url>

@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>ShakeByte</copyright>
-    <lastBuildDate>Tue, 21 May 2019 09:55:15 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 22 May 2019 10:12:28 -0500</lastBuildDate>
     
 	<atom:link href="http://www.shakebyte.com/index.xml" rel="self" type="application/rss+xml" />
     
@@ -24,11 +24,20 @@ It makes use of a variety of open source projects including:
     </item>
     
     <item>
+      <title>[Python] Jupyter 安装与配置、并支持tensorflow2.0</title>
+      <link>http://www.shakebyte.com/post/python/20190522_jupyter/</link>
+      <pubDate>Wed, 22 May 2019 10:12:28 -0500</pubDate>
+      
+      <guid>http://www.shakebyte.com/post/python/20190522_jupyter/</guid>
+      <description>Jupyter Jupyter Notebook作为一种web应用程序，为交互式计算提供了一个命令行。 该工具可以使用多种语言，包括Python，Julia，R，Hask</description>
+    </item>
+    
+    <item>
       <title>[系统管理] ubuntu 16.04LTS平滑升级至18.04</title>
-      <link>http://www.shakebyte.com/post/dc/20190521_ubuntu/</link>
+      <link>http://www.shakebyte.com/post/python/20190521_ubuntu/</link>
       <pubDate>Tue, 21 May 2019 09:55:15 -0500</pubDate>
       
-      <guid>http://www.shakebyte.com/post/dc/20190521_ubuntu/</guid>
+      <guid>http://www.shakebyte.com/post/python/20190521_ubuntu/</guid>
       <description>升级背景 近日，计划使用AWS主机安装jupyter时发现，主机操作系统版本是ubuntu 16.04LTS，无论如何更新Python3只能停留</description>
     </item>
     

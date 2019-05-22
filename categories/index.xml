@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>ShakeByte</copyright>
-    <lastBuildDate>Tue, 21 May 2019 09:55:15 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 22 May 2019 10:12:28 -0500</lastBuildDate>
     
 	<atom:link href="http://www.shakebyte.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>开源软件</title>
+      <link>http://www.shakebyte.com/categories/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/</link>
+      <pubDate>Wed, 22 May 2019 10:12:28 -0500</pubDate>
+      
+      <guid>http://www.shakebyte.com/categories/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>数据中心</title>
@@ -27,15 +36,6 @@
       <pubDate>Wed, 15 May 2019 16:00:05 -0500</pubDate>
       
       <guid>http://www.shakebyte.com/categories/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>开源软件</title>
-      <link>http://www.shakebyte.com/categories/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/</link>
-      <pubDate>Tue, 14 May 2019 18:18:53 -0500</pubDate>
-      
-      <guid>http://www.shakebyte.com/categories/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/</guid>
       <description></description>
     </item>
     
