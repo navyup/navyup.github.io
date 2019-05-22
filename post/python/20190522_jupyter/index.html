@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>[Python] Jupyter 安装与配置、并支持tensorflow2.0 - Bring A Big Idea to You</title>
+  <title>[Python] Jupyter 服务器端安装与配置 - Bring A Big Idea to You</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -38,26 +38,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="[Python] Jupyter 安装与配置、并支持tensorflow2.0" />
+<meta property="og:title" content="[Python] Jupyter 服务器端安装与配置" />
 <meta property="og:description" content="Jupyter Jupyter Notebook作为一种web应用程序，为交互式计算提供了一个命令行。 该工具可以使用多种语言，包括Python，Julia，R，Hask" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://www.shakebyte.com/post/python/20190522_jupyter/" />
 <meta property="article:published_time" content="2019-05-22T10:12:28-05:00"/>
 <meta property="article:modified_time" content="2019-05-22T10:12:28-05:00"/>
 
-<meta itemprop="name" content="[Python] Jupyter 安装与配置、并支持tensorflow2.0">
+<meta itemprop="name" content="[Python] Jupyter 服务器端安装与配置">
 <meta itemprop="description" content="Jupyter Jupyter Notebook作为一种web应用程序，为交互式计算提供了一个命令行。 该工具可以使用多种语言，包括Python，Julia，R，Hask">
 
 
 <meta itemprop="datePublished" content="2019-05-22T10:12:28-05:00" />
 <meta itemprop="dateModified" content="2019-05-22T10:12:28-05:00" />
-<meta itemprop="wordCount" content="1225">
+<meta itemprop="wordCount" content="1157">
 
 
 
 <meta itemprop="keywords" content="系统管理,开源软件," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[Python] Jupyter 安装与配置、并支持tensorflow2.0"/>
+<meta name="twitter:title" content="[Python] Jupyter 服务器端安装与配置"/>
 <meta name="twitter:description" content="Jupyter Jupyter Notebook作为一种web应用程序，为交互式计算提供了一个命令行。 该工具可以使用多种语言，包括Python，Julia，R，Hask"/>
 
 <!--[if lte IE 9]>
@@ -125,14 +125,14 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">[Python] Jupyter 安装与配置、并支持tensorflow2.0</h1>
+      <h1 class="post-title">[Python] Jupyter 服务器端安装与配置</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2019-05-22 </span>
         <div class="post-category">
             <a href="/categories/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/"> 开源软件 </a>
             </div>
-          <span class="more-meta"> 约 1225 字 </span>
+          <span class="more-meta"> 约 1157 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -160,7 +160,6 @@
 <li><a href="#配置域名">配置域名</a></li>
 <li><a href="#域名访问jupyter-notebook">域名访问jupyter notebook</a></li>
 <li><a href="#最终效果">最终效果</a></li>
-<li><a href="#支持tensorflow-2-0">支持tensorflow 2.0</a></li>
 </ul>
 </nav>
   </div>
@@ -348,34 +347,7 @@ c.NotebookApp.port = 8888</pre></td></tr></table>
 <p><img src="../../img/jupyter_table.png" alt="" /></p>
 </blockquote>
 
-<h1 id="支持tensorflow-2-0">支持tensorflow 2.0</h1>
-
-<p>ubuntu 系统下使用如下命令：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-linux" data-lang="linux"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-linux" data-lang="linux">$sudo su
-#pip3 install tensorflow==2.0.0-alpha0
-#exit
-$python3
-&gt;&gt;&gt; import tensorflow as tf
-&gt;&gt;&gt; print(tf.__verion__)
-2.0.0-alpha0
-&gt;&gt;&gt;exit()</code></pre></td></tr></table>
-</div>
-</div>
-<p><img src="../../img/jupyter_tf2.png" alt="" /></p>
-
-<p><strong>至此， Jupyter notebook 完成安装，并配置了导航窗口和域名访问，最后支持tensorflow 2.0环境，常见jupyter notebook 环境配置完毕。</strong></p>
+<p><strong>至此， Jupyter notebook 完成安装，并配置了导航窗口和域名访问，常见jupyter notebook 环境配置完毕。</strong></p>
 
 <p>参考材料：<a href="https://jupyter-notebook.readthedocs.io/en/latest/index.html">https://jupyter-notebook.readthedocs.io/en/latest/index.html</a></p>
 
