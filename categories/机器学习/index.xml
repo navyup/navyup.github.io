@@ -7,26 +7,35 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>ShakeByte</copyright>
-    <lastBuildDate>Sun, 12 May 2019 10:35:40 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 26 May 2019 13:32:55 -0500</lastBuildDate>
     
 	<atom:link href="http://www.shakebyte.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>[机器学习] 特征分类算法之Boosting</title>
+      <link>http://www.shakebyte.com/post/ml/20190531_adaboost/</link>
+      <pubDate>Sun, 26 May 2019 13:32:55 -0500</pubDate>
+      
+      <guid>http://www.shakebyte.com/post/ml/20190531_adaboost/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>[深度学习] 什么是卷积神经网络</title>
-      <link>http://www.shakebyte.com/post/tf2/201905012-cnn/</link>
+      <link>http://www.shakebyte.com/post/ml/201905012-cnn/</link>
       <pubDate>Sun, 12 May 2019 10:35:40 -0500</pubDate>
       
-      <guid>http://www.shakebyte.com/post/tf2/201905012-cnn/</guid>
+      <guid>http://www.shakebyte.com/post/ml/201905012-cnn/</guid>
       <description>前沿 人工智能正加快催化人机交互方面的应用，并树立了一个个令人惊叹的里程碑。无数的应用领域的正在发生翻天覆地的变化，计算机视觉也是其中领域之一</description>
     </item>
     
     <item>
       <title>[Tensorflow2.0] Horse or Human</title>
-      <link>http://www.shakebyte.com/post/tf2/20190508-horse-and-human/</link>
+      <link>http://www.shakebyte.com/post/ml/20190508-horse-and-human/</link>
       <pubDate>Wed, 08 May 2019 09:23:13 -0500</pubDate>
       
-      <guid>http://www.shakebyte.com/post/tf2/20190508-horse-and-human/</guid>
+      <guid>http://www.shakebyte.com/post/ml/20190508-horse-and-human/</guid>
       <description>&lt;p&gt;&lt;strong&gt;摘要：&lt;/strong&gt; 本文利用马或人的图片数据来训练模型，让模型经过训练后具备识别新的图片中是含有马或者人，从而达到自动识别（recognition）。&lt;/p&gt;</description>
     </item>
     
