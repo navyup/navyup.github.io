@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>ShakeByte</copyright>
-    <lastBuildDate>Sun, 26 May 2019 13:32:55 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 01 Jun 2019 19:02:19 -0500</lastBuildDate>
     
 	<atom:link href="http://www.shakebyte.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,9 +15,18 @@
     <item>
       <title>机器学习</title>
       <link>http://www.shakebyte.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
-      <pubDate>Sun, 26 May 2019 13:32:55 -0500</pubDate>
+      <pubDate>Sat, 01 Jun 2019 19:02:19 -0500</pubDate>
       
       <guid>http://www.shakebyte.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>深度学习</title>
+      <link>http://www.shakebyte.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Sat, 01 Jun 2019 19:02:19 -0500</pubDate>
+      
+      <guid>http://www.shakebyte.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</guid>
       <description></description>
     </item>
     
@@ -45,15 +54,6 @@
       <pubDate>Wed, 15 May 2019 16:00:05 -0500</pubDate>
       
       <guid>http://www.shakebyte.com/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>深度学习</title>
-      <link>http://www.shakebyte.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</link>
-      <pubDate>Sun, 12 May 2019 10:35:40 -0500</pubDate>
-      
-      <guid>http://www.shakebyte.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</guid>
       <description></description>
     </item>
     

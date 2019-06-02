@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[Tensorflow2.0] Iris flower 分类问题 - Bring A Big Idea to You</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="任海军" /><meta name="description" content="Iris flower 数据集 Iris flower data set，是植物学家整理的鸢尾花数据集。Iris flower，中文翻译为鸢尾花，有三种类型，分别是：setosa, versicolor, virginica. 植物学家" /><meta name="keywords" content="Tensorflow, IRIS" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.5 with even 4.0.0" />
+
+
+<link rel="canonical" href="http://www.shakebyte.com/post/ml/20190601_tf2_irisflowers/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[Tensorflow2.0] Iris flower 分类问题" />
+<meta property="og:description" content="Iris flower 数据集 Iris flower data set，是植物学家整理的鸢尾花数据集。Iris flower，中文翻译为鸢尾花，有三种类型，分别是：setosa, versicolor, virginica. 植物学家" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.shakebyte.com/post/ml/20190601_tf2_irisflowers/" />
+<meta property="article:published_time" content="2019-06-01T19:02:19-05:00"/>
+<meta property="article:modified_time" content="2019-06-01T19:02:19-05:00"/>
+
+<meta itemprop="name" content="[Tensorflow2.0] Iris flower 分类问题">
+<meta itemprop="description" content="Iris flower 数据集 Iris flower data set，是植物学家整理的鸢尾花数据集。Iris flower，中文翻译为鸢尾花，有三种类型，分别是：setosa, versicolor, virginica. 植物学家">
+
+
+<meta itemprop="datePublished" content="2019-06-01T19:02:19-05:00" />
+<meta itemprop="dateModified" content="2019-06-01T19:02:19-05:00" />
+<meta itemprop="wordCount" content="1304">
+
+
+
+<meta itemprop="keywords" content="机器学习,深度学习," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[Tensorflow2.0] Iris flower 分类问题"/>
+<meta name="twitter:description" content="Iris flower 数据集 Iris flower data set，是植物学家整理的鸢尾花数据集。Iris flower，中文翻译为鸢尾花，有三种类型，分别是：setosa, versicolor, virginica. 植物学家"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ShakeByte</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ShakeByte</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">[Tensorflow2.0] Iris flower 分类问题</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-06-01 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"> 机器学习 </a>
+            </div>
+          <span class="more-meta"> 约 1304 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#iris-flower-数据集">Iris flower 数据集</a></li>
+<li><a href="#数据集来源">数据集来源</a></li>
+<li><a href="#数据处理">数据处理</a>
+<ul>
+<li><a href="#特征数据与标签">特征数据与标签</a></li>
+<li><a href="#数据分析">数据分析</a></li>
+<li><a href="#整理训练数据">整理训练数据</a></li>
+<li><a href="#内置估算模型的实例化">内置估算模型的实例化</a></li>
+</ul></li>
+<li><a href="#训练-评估-预测">训练、评估、预测</a>
+<ul>
+<li><a href="#训练">训练</a></li>
+<li><a href="#评估">评估</a></li>
+<li><a href="#预测">预测</a></li>
+<li><a href="#查看预测结果">查看预测结果</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h1 id="iris-flower-数据集">Iris flower 数据集</h1>
+
+<p>Iris flower data set，是植物学家整理的鸢尾花数据集。Iris flower，中文翻译为鸢尾花，有三种类型，分别是：setosa, versicolor, virginica. 植物学家选择了这些花的四个特征分别进行记录, sepal_width,sepal_length, petal_width, petal_length，即花萼宽度、花萼长度、花瓣宽度、花瓣长度。这四种特征就可以描述不同类别的鸢尾花。
+<img src="../../img/irisflowers.png" alt="鸢尾花" /></p>
+
+<h1 id="数据集来源">数据集来源</h1>
+
+<p><a href="https://storage.googleapis.com/download.tensorflow.org/data/iris_training.csv">训练数据下载</a>
+<a href="https://storage.googleapis.com/download.tensorflow.org/data/iris_test.csv">测试数据下载</a></p>
+
+<p>通过研究数据集和已有特征，使用tensorflow2.0来建立模型，实现鸢尾花分类。</p>
+
+<h1 id="数据处理">数据处理</h1>
+
+<h2 id="特征数据与标签">特征数据与标签</h2>
+
+<p>由于数据集师电子表格数据，为了便于理解，给数据集加上列名。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#电子表格列名</span>
+<span class="n">CSV_COLUMN_NAMES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SepalLength&#39;</span><span class="p">,</span> <span class="s1">&#39;SepalWidth&#39;</span><span class="p">,</span> <span class="s1">&#39;PetalLength&#39;</span><span class="p">,</span> <span class="s1">&#39;PetalWidth&#39;</span><span class="p">,</span> <span class="s1">&#39;Species&#39;</span><span class="p">]</span>
+<span class="c1">#鸢尾花种类，即label</span>
+<span class="n">SPECIES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Setosa&#39;</span><span class="p">,</span> <span class="s1">&#39;Versicolor&#39;</span><span class="p">,</span> <span class="s1">&#39;Virginica&#39;</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="c1"># pandas 可以直接处理电子表格中的数据</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="c1">#确认tensorflow版本，不是2.0，请使用`pip install tensorflow==2.0.0-alpha0安装`</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+
+<span class="c1">#下载数据</span>
+<span class="n">train_path</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span>
+    <span class="s2">&#34;iris_training.csv&#34;</span><span class="p">,</span> <span class="s2">&#34;https://storage.googleapis.com/download.tensorflow.org/data/iris_training.csv&#34;</span><span class="p">)</span>
+<span class="n">test_path</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span>
+    <span class="s2">&#34;iris_test.csv&#34;</span><span class="p">,</span> <span class="s2">&#34;https://storage.googleapis.com/download.tensorflow.org/data/iris_test.csv&#34;</span><span class="p">)</span>
+<span class="c1">#数据直接读入训练集train和测试集test</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">train_path</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">CSV_COLUMN_NAMES</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">test_path</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">CSV_COLUMN_NAMES</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="数据分析">数据分析</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#查看训练集前10条数据</span>
+<span class="n">train</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">train</span><span class="o">.</span><span class="n">shape</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>通过查看可以得出，train有120数据，test有30条数据，都是5列，其中第五列是label
+<img src="../../img/iris_train_head10.png" alt="" /></p>
+
+<h2 id="整理训练数据">整理训练数据</h2>
+
+<p>为了使用Tensorflow中定义好的Estimator，而不用自己去实现模型定义、数据训练、模型评估，需要对现有数据集进行整理，将特征（feature）和标签（label）分离，形成喂入Estimator的数据流输入函数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#特征数据与标签的分离</span>
+<span class="n">train_data</span><span class="p">,</span> <span class="n">train_labels</span> <span class="o">=</span> <span class="n">train</span><span class="p">,</span> <span class="n">train</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;Species&#39;</span><span class="p">)</span>
+<span class="n">test_data</span><span class="p">,</span> <span class="n">test_labels</span> <span class="o">=</span> <span class="n">test</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;Species&#39;</span><span class="p">)</span>
+<span class="c1">#定义数据流输入函数</span>
+<span class="k">def</span> <span class="nf">input_fn</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">bacth_size</span><span class="o">=</span><span class="mi">256</span><span class="p">):</span>
+  <span class="c1">#将特征数据和标签转换成Dataset类型的</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">((</span><span class="nb">dict</span><span class="p">(</span><span class="n">feature</span><span class="p">),</span><span class="n">labels</span><span class="p">))</span>
+  <span class="c1">#如若在训练模式中，需要多次重复</span>
+    <span class="k">if</span> <span class="n">training</span><span class="p">:</span>
+       <span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>定义特征数据列，其目的高速模型那些数据列是特征数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">my_feature_columns</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">train</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">my_feature_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="内置估算模型的实例化">内置估算模型的实例化</h2>
+
+<p>在 Tensorflow2.0中对于常见的分类问题已经定义了（内置）了许多模型，如：</p>
+
+<ul>
+<li><code>tf.estimator.DNNClassifier</code>  多分类问题</li>
+<li><code>tf.estimator.DNNLinearCombinedClassifier</code> 大型分类问题</li>
+<li><code>tf.estimator.LinearClassifier</code> 基于线性的分类问题</li>
+</ul>
+
+<p>本数据集Iris flower分类问题使用内置<code>tf.estimator.DNNClassifier</code> Estimator即可。</p>
+
+<p>使用以下代码初始化内置模型</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">classifier</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">DNNClassifier</span><span class="p">(</span>
+    <span class="n">feature_columns</span><span class="o">=</span><span class="n">my_feature_columns</span><span class="p">,</span>
+    <span class="c1">#两个隐藏层，分别具有30个和10个节点.</span>
+    <span class="n">hidden_units</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    <span class="c1">#模型具有三个类别.</span>
+    <span class="n">n_classes</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="训练-评估-预测">训练、评估、预测</h1>
+
+<p>在上面的处理中，已经完成了模型训练前的准备工作，接下里可以进行模型训练、评估和预测。</p>
+
+<h2 id="训练">训练</h2>
+
+<p>利用tf.estimator.DNNClassifier已经实例化的classifier，调用方法train方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#模型训练.</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+    <span class="n">input_fn</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">input_fn</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+    <span class="n">steps</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="评估">评估</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">eval_result</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span>
+    <span class="n">input_fn</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">input_fn</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">模型评估结果准确度是: {accuracy:0.3f}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">eval_result</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><img src="../../img/360截图17981126948590.png" alt="" /></p>
+
+<h2 id="预测">预测</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 利用模型预测新的特征数据属于何种分类</span>
+<span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Setosa&#39;</span><span class="p">,</span> <span class="s1">&#39;Versicolor&#39;</span><span class="p">,</span> <span class="s1">&#39;Virginica&#39;</span><span class="p">]</span>
+<span class="n">predict_x</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;SepalLength&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.1</span><span class="p">,</span> <span class="mf">5.9</span><span class="p">,</span> <span class="mf">6.9</span><span class="p">],</span>
+    <span class="s1">&#39;SepalWidth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">],</span>
+    <span class="s1">&#39;PetalLength&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.7</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">5.4</span><span class="p">],</span>
+    <span class="s1">&#39;PetalWidth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">input_fn</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">features</span><span class="p">))</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
+<span class="c1">#调用训练好的模（分类器），并将特征数据喂给模型以供预测    </span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+    <span class="n">input_fn</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">input_fn</span><span class="p">(</span><span class="n">predict_x</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="查看预测结果">查看预测结果</h2>
+
+<p>由于predictions返回的是python形式的迭代数据，因此需要利用循环来输出预测结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">pred_dict</span><span class="p">,</span> <span class="n">expec</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
+    <span class="n">class_id</span> <span class="o">=</span> <span class="n">pred_dict</span><span class="p">[</span><span class="s1">&#39;class_ids&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">probability</span> <span class="o">=</span> <span class="n">pred_dict</span><span class="p">[</span><span class="s1">&#39;probabilities&#39;</span><span class="p">][</span><span class="n">class_id</span><span class="p">]</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Prediction is &#34;{}&#34; ({:.1f}%), expected &#34;{}&#34;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">SPECIES</span><span class="p">[</span><span class="n">class_id</span><span class="p">],</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">probability</span><span class="p">,</span> <span class="n">expec</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>结果是：</p>
+
+<blockquote>
+<p>Prediction is &ldquo;Setosa&rdquo; (99.9%), expected &ldquo;Setosa&rdquo;</p>
+
+<p>Prediction is &ldquo;Versicolor&rdquo; (100.0%), expected &ldquo;Versicolor&rdquo;</p>
+
+<p>Prediction is &ldquo;Virginica&rdquo; (100.0%), expected &ldquo;Virginica&rdquo;</p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">任海军</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-06-01
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content">MIT</span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="../../img/reward/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+          <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/ml/20190531_adaboost/">
+            <span class="next-text nav-default">[机器学习] 特征分类算法之Boosting</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+
+  
+
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ytQYYji1sw27sHaCwKp4zxGz-gzGzoHsz',
+        appKey: 'POTrufGeHI9JrR6AujVXIn3v',
+        notify: 'false',
+        verify: 'false',
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor: 'false'
+    });
+  </script>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:navyup@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://www.facebook.com/haijun.ren.9" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://github.com/navyup" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/navyup" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://www.shakebyte.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 -
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy;
+    2017 -
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">ShakeByte</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
