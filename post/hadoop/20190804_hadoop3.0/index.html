@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[Hadoop3.x] 深入了解Hadoop 3.x - Bring A Big Idea to You</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="任海军" /><meta name="description" content="" /><meta name="keywords" content="Hadoop, AI, 人工智能" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.5 with even 4.0.0" />
+
+
+<link rel="canonical" href="http://www.shakebyte.com/post/hadoop/20190804_hadoop3.0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[Hadoop3.x] 深入了解Hadoop 3.x" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.shakebyte.com/post/hadoop/20190804_hadoop3.0/" />
+<meta property="article:published_time" content="2019-07-03T15:26:04-05:00"/>
+<meta property="article:modified_time" content="2019-07-03T15:26:04-05:00"/>
+
+<meta itemprop="name" content="[Hadoop3.x] 深入了解Hadoop 3.x">
+<meta itemprop="description" content="">
+
+
+<meta itemprop="datePublished" content="2019-07-03T15:26:04-05:00" />
+<meta itemprop="dateModified" content="2019-07-03T15:26:04-05:00" />
+<meta itemprop="wordCount" content="5065">
+
+
+
+<meta itemprop="keywords" content="Hadoop,人工智能," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[Hadoop3.x] 深入了解Hadoop 3.x"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ShakeByte</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ShakeByte</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">[Hadoop3.x] 深入了解Hadoop 3.x</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-07-03 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"> 学习笔记 </a>
+            </div>
+          <span class="more-meta"> 约 5065 字 </span>
+          <span class="more-meta"> 预计阅读 11 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#关于hadoop">关于Hadoop</a>
+<ul>
+<li><a href="#起源">起源</a></li>
+<li><a href="#什么是hadoop">什么是Hadoop</a></li>
+<li><a href="#发行版本">发行版本</a></li>
+<li><a href="#hadoop-核心组件以及生态圈">Hadoop 核心组件以及生态圈</a></li>
+</ul></li>
+<li><a href="#hadoop-误区与优缺点">Hadoop 误区与优缺点</a>
+<ul>
+<li><a href="#hadoop与其组件的关系">Hadoop与其组件的关系</a></li>
+<li><a href="#hadoop不只是三副本">Hadoop不只是三副本</a></li>
+<li><a href="#hadoop必须是三个节点起配吗">Hadoop必须是三个节点起配吗</a></li>
+<li><a href="#hdfs的优缺点">HDFS的优缺点</a>
+<ul>
+<li><a href="#优点">优点</a>
+<ul>
+<li><a href="#高容错性">高容错性</a></li>
+<li><a href="#适合大数据处理">适合大数据处理</a></li>
+<li><a href="#利用廉价机器搭建集群-通过多副本提高可靠性">利用廉价机器搭建集群，通过多副本提高可靠性</a></li>
+</ul></li>
+<li><a href="#缺点">缺点</a></li>
+<li><a href="#hdfs的适用场景">HDFS的适用场景</a></li>
+</ul></li>
+<li><a href="#数据块-block-大小设置依据">数据块(Block)大小设置依据</a></li>
+</ul></li>
+<li><a href="#hadoop2-x和3-x-区别与联系">Hadoop2.x和3.x 区别与联系</a>
+<ul>
+<li>
+<ul>
+<li><a href="#1-最低java版本要求从java7变为java8">1.最低Java版本要求从Java7变为Java8</a></li>
+<li><a href="#2-hdfs支持纠删码-erasure-coding">2.HDFS支持纠删码（erasure coding）</a></li>
+<li><a href="#3-重写shell脚本">3.重写Shell脚本</a></li>
+<li><a href="#4-覆盖客户端的jar-shaded-client-jars">4.覆盖客户端的jar（Shaded client jars）</a></li>
+<li><a href="#5-支持opportunistic-containers和distributed-scheduling">5.支持Opportunistic Containers和Distributed Scheduling</a></li>
+<li><a href="#6-mapreduce任务级本地优化">6.MapReduce任务级本地优化</a></li>
+<li><a href="#7-支持多余2个以上的namenode">7.支持多余2个以上的NameNode</a></li>
+<li><a href="#8-修改了多重服务的默认端口">8.修改了多重服务的默认端口</a></li>
+<li><a href="#9-提供文件系统连接器-filesystem-connnector-支持microsoft-azure-data-lake和aliyun对象存储系统">9.提供文件系统连接器（filesystem connnector）,支持Microsoft Azure Data Lake和Aliyun对象存储系统</a></li>
+<li><a href="#10-数据节点内置平衡器-intra-datanode-balancer">10.数据节点内置平衡器（Intra-datanode balancer）</a></li>
+<li><a href="#11-重写了守护进程和任务的堆管理机制">11.重写了守护进程和任务的堆管理机制</a></li>
+<li><a href="#12-s3gurad-为s3a文件系统客户端提供一致性和元数据缓存">12.S3Gurad:为S3A文件系统客户端提供一致性和元数据缓存</a></li>
+<li><a href="#13-hdfs的基于路由器互联-hdfs-router-based-federation">13.HDFS的基于路由器互联（HDFS Router-Based Federation）</a></li>
+<li><a href="#14-基于api配置的capacity-scheduler-queue-configuration">14.基于API配置的Capacity Scheduler queue configuration</a></li>
+<li><a href="#15-yarn资源类型">15.YARN资源类型</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="关于hadoop">关于Hadoop</h1>
+
+<h2 id="起源">起源</h2>
+
+<p><img src="../../img/hadoop-logo.jpg" alt="hadoop logo" /></p>
+
+<p>Hadoop起源于Nutch，其设计目标是构建一个大型的全网搜索引擎，包括网页抓取、索引、查询等功能。Nutch的开发人员完成了相应的开源实现HDFS和MAPREDUCE，并从Nutch中剥离成为独立项目HADOOP，到2008年1月，HADOOP成为Apache顶级项目，迎来了它的快速发展期。截止2019年8月Hadoop版本已经进化到3.2。</p>
+
+<h2 id="什么是hadoop">什么是Hadoop</h2>
+
+<ul>
+<li>狭义上： 它是Apache的一个顶级项目：Apahce Hadoop</li>
+<li>广义上: 是指以Hadoop为核心的整个大数据存储和计算软件生态体系，通常我们说的Hadoop指的就是这个，而不仅仅是Apahce Hadoop软件本身。</li>
+</ul>
+
+<h2 id="发行版本">发行版本</h2>
+
+<p>目前Hadoop发行版非常多，有Intel发行版，华为发行版、Cloudera发行版（CDH）、Hortonworks版本等，所有这些发行版均是基于Apache Hadoop衍生出来的，之所以有这么多的版本，是由于Apache Hadoop的开源协议决定的：<strong>任何人可以对其进行修改，并作为开源或商业产品发布/销售。</strong></p>
+
+<p><code>目前，主要的发行版本有三个，但商业主要用的版本多为CDH版。</code></p>
+
+<ul>
+<li>Apache（最原始的版本，所有发行版均基于这个版本进行改进）</li>
+<li>Cloudera版本（Cloudera’s Distribution Including Apache Hadoop，简称CDH）</li>
+<li>Hortonworks版本(Hortonworks Data Platform，简称“HDP”）</li>
+</ul>
+
+<h2 id="hadoop-核心组件以及生态圈">Hadoop 核心组件以及生态圈</h2>
+
+<p>Hadoop核心组件最主要有两个，分别是HDFS和MapReduce，其作用是：</p>
+
+<ul>
+<li>HDFS是基于分布式存储文件系统，主要用来存储数据</li>
+<li>MapReduce是基于并行处理数据的一种分布式计算框架。
+<code>注：Hadoop1.x中MapReduce同时负责计算和资源调度，但在Hadoop2.x后，由Yarn专门负责计算资源的管理和调度，而MapReduce只负责计算。</code></li>
+</ul>
+
+<p>其他组件作用如下：</p>
+
+<ul>
+<li>Hive：基于Hadoop的类SQL数据仓库工具</li>
+<li>Hbase：基于Hadoop的列式分布式NoSQL数据库</li>
+<li>ZooKeeper：分布式协调服务组件</li>
+<li>Mahout：基于MapReduce/Flink/Spark等分布式运算框架的机器学习算法库</li>
+<li>Oozie/Azkaban：工作流调度引擎</li>
+<li>Sqoop：数据迁入迁出工具</li>
+<li>Flume：日志采集工具</li>
+</ul>
+
+<p><img src="../../img/1228818-20180302191054664-57367875.png" alt="hadoop system map" /></p>
+
+<h1 id="hadoop-误区与优缺点">Hadoop 误区与优缺点</h1>
+
+<h2 id="hadoop与其组件的关系">Hadoop与其组件的关系</h2>
+
+<p>Hadoop是面向大数据存储和计算的开源软件平台，它是以由软件组件集合构成的平台，并不是一个软件。其组件有很多，每个组件负责着不同的功能。如HDFS组件负责大数据的存储，MapReduce负责大数据的计算。</p>
+
+<h2 id="hadoop不只是三副本">Hadoop不只是三副本</h2>
+
+<p>HDFS是Hadoop中负责大数据的存储方案，HDFS是分布式的数据存储解决方案，每份数据默认副本数量为3，但也可以是1，是2，是其它数字，而且Hadoop3.X已经开始支持Erasure Code（纠删码）的数据安全存储方案。所以在表达时区分开Hadoop和HDFS，因为它的内涵和外延是不一样的。</p>
+
+<h2 id="hadoop必须是三个节点起配吗">Hadoop必须是三个节点起配吗</h2>
+
+<p><code>答案是否定的。</code></p>
+
+<p>在安装配置Apache Hadoop软件平台时,运行方式有三种模式可以选：</p>
+
+<ul>
+<li><p>单机模式（Stand alone），即单节点集群(Single Node Cluster)模式,通常用于debug或者练习实验用。</p></li>
+
+<li><p>伪分布式(Pseudo-Distributed)，即在一台机器上模拟多节点集群模式，在硬件资源有限的情况下，配置全分布式的集群模式。其配置和全分布式基本一样。</p></li>
+
+<li><p>全分布式(Fully-Distributed)，完全的集群模式，根据需求做平台规划，然后选择节点性能配置以满足业务需求。<code>切记：不要在选择技术方案时候，而忘记了为何种业务需求或者应用场景而选择技术方案，因为Hadoop开发设计之初是有适用场景的。</code></p></li>
+</ul>
+
+<h2 id="hdfs的优缺点">HDFS的优缺点</h2>
+
+<p>HDFS（Hadoop Distributed File System）是一个分布式文件系统，用于存储文件，通过目录树定位文件；它是由很多服务器联合起来实现功能，集群中的服务器各有各的角色。如DataNode、NameNode.</p>
+
+<h3 id="优点">优点</h3>
+
+<h4 id="高容错性">高容错性</h4>
+
+<ul>
+<li>数据自动保存为多个副本，它通过增加副本的形式，提高容错性。</li>
+<li>某一个副本丢失后（数据节点损坏后），它可以自动恢复。</li>
+</ul>
+
+<h4 id="适合大数据处理">适合大数据处理</h4>
+
+<ul>
+<li>数据规模：能够处理数据规模达到GB/TB,甚至PB级别的数据；</li>
+
+<li><p>文件规模：能够处理百万规模以上的文件数量，数量相当之大；</p>
+
+<h4 id="利用廉价机器搭建集群-通过多副本提高可靠性">利用廉价机器搭建集群，通过多副本提高可靠性</h4></li>
+</ul>
+
+<h3 id="缺点">缺点</h3>
+
+<ul>
+<li>不适合低延时的数据访问，例如毫秒级的存储数据。</li>
+<li>无法高效的对大量小文件进行存储。</li>
+</ul>
+
+<blockquote>
+<p>（1）如果存储大量小文件的话，它会占用NameNode大量的内存来存储文件目录和块信息，这样做是不可以的，因为NameNode的内存总是有限的。<code>因为开机后，集群里所有的数据目录和块信息都会加载进入NameNode节点的内存里</code></p>
+
+<p>(2)小文件存储的寻址时间会超过目标文件的读取时间，这就违反了HDFS的设计初衷和目标。</p>
+</blockquote>
+
+<ul>
+<li>不支持并发写入和文件随机修改。</li>
+</ul>
+
+<blockquote>
+<p>(1)一个文件只能有一个句柄写，不允许多个线程同时写</p>
+
+<p>(2)文件操作仅支持数据追加（即Append方法），不支持文件的随机修改。</p>
+</blockquote>
+
+<h3 id="hdfs的适用场景">HDFS的适用场景</h3>
+
+<p><code>适合一次写入、多次读出的场景，且不支持文件的修改。</code></p>
+
+<p><code>适合做数据分析，并不适合来做网盘应用。</code></p>
+
+<h2 id="数据块-block-大小设置依据">数据块(Block)大小设置依据</h2>
+
+<p><code>原则：目标数据的寻址时间应该是目标数据读取时间的1%。</code>
+在Hadoop1.X中，block大小默认是64M，自Hadoop2.x开始默认大小为128M。具体设置多少需要根据所存储数据的特性来计算而得。</p>
+
+<h1 id="hadoop2-x和3-x-区别与联系">Hadoop2.x和3.x 区别与联系</h1>
+
+<p>相对于之前主要生产发布版本Hadoop 2，Apache Hadoop 3整合许多重要的增强功能。 Hadoop 3提供了稳定性和高质量的API，可以用于实际的产品开发。下面简要介绍一下Hadoop3的主要变化。</p>
+
+<h3 id="1-最低java版本要求从java7变为java8">1.最低Java版本要求从Java7变为Java8</h3>
+
+<p>所有Hadoop的jar都是基于Java 8运行是版本进行编译执行的，仍在使用Java 7或更低Java版本的用户需要升级到Java 8。</p>
+
+<h3 id="2-hdfs支持纠删码-erasure-coding">2.HDFS支持纠删码（erasure coding）</h3>
+
+<p>纠删码（erasure coding）是一种比副本存储更节省存储空间的数据持久化存储方法。比如Reed-Solomon(10,4)标准编码技术只需要1.4倍的空间开销，而标准的HDFS副本技术则需要3倍的空间开销。由于纠删码额外开销主要在于重建和远程读写，它通常用来存储不经常使用的数据（冷数据）。另外，在使用这个新特性时，用户还需要考虑网络和CPU开销。</p>
+
+<h3 id="3-重写shell脚本">3.重写Shell脚本</h3>
+
+<p>Hadoop的shell脚本被重写，修补了许多长期存在的bug，并增加了一些新的特性。</p>
+
+<h3 id="4-覆盖客户端的jar-shaded-client-jars">4.覆盖客户端的jar（Shaded client jars）</h3>
+
+<p>在2.x版本中，hadoop-client Maven artifact配置将会拉取hadoop的传递依赖到hadoop应用程序的环境变量，这回带来传递依赖的版本和应用程序的版本相冲突的问题。</p>
+
+<p>HADOOP-11804 添加新 hadoop-client-api和hadoop-client-runtime artifcat，将hadoop的依赖隔离在一个单一Jar包中，也就避免hadoop依赖渗透到应用程序的类路径中。</p>
+
+<h3 id="5-支持opportunistic-containers和distributed-scheduling">5.支持Opportunistic Containers和Distributed Scheduling</h3>
+
+<p>ExecutionType概念被引入，这样一来，应用能够通过Opportunistic的一个执行类型来请求容器。即使在调度时，没有可用的资源，这种类型的容器也会分发给NM中执行程序。在这种情况下，容器将被放入NM的队列中，等待可用资源，以便执行。Opportunistic container优先级要比默认Guaranteedcontainer低，在需要的情况下，其资源会被抢占，以便Guaranteed container使用。这样就需要提高集群的使用率。</p>
+
+<p>Opportunistic container默认被中央RM分配，但是，目前已经增加分布式调度器的支持，该分布式调度器做为AMRProtocol解析器来实现。</p>
+
+<h3 id="6-mapreduce任务级本地优化">6.MapReduce任务级本地优化</h3>
+
+<p>MapReduce添加了映射输出收集器的本地化实现的支持。对于密集型的洗牌操作（shuffle-intensive）jobs，可以带来30%的性能提升。</p>
+
+<h3 id="7-支持多余2个以上的namenode">7.支持多余2个以上的NameNode</h3>
+
+<p>针对HDFS NameNode的高可用性，最初实现方式是提供一个活跃的（active）NameNode和一个备用的（Standby）NameNode。通过对3个JournalNode的法定数量的复制编辑，使得这种架构能够对系统中任何一个节点的故障进行容错。</p>
+
+<p>该功能能够通过运行更多备用NameNode来提供更高的容错性，满足一些部署的需求。比如，通过配置3个NameNode和5个JournalNode，集群能够实现两个节点故障的容错。</p>
+
+<h3 id="8-修改了多重服务的默认端口">8.修改了多重服务的默认端口</h3>
+
+<p>在之前的Hadoop版本中，多重Hadoop服务的默认端口在Linux临时端口范围内容（32768-61000），这就意味着，在启动过程中，一些服务器由于端口冲突会启动失败。这些冲突端口已经从临时端口范围移除，NameNode、Secondary NameNode、DataNode和KMS会受到影响。我们的文档已经做了相应的修改，可以通过阅读发布说明 HDFS-9427和HADOOP-12811详细了解所有被修改的端口。</p>
+
+<h3 id="9-提供文件系统连接器-filesystem-connnector-支持microsoft-azure-data-lake和aliyun对象存储系统">9.提供文件系统连接器（filesystem connnector）,支持Microsoft Azure Data Lake和Aliyun对象存储系统</h3>
+
+<p>Hadoop支持和Microsoft Azure Data Lake和Aliyun对象存储系统集成，并将其作为Hadoop兼容的文件系统。</p>
+
+<h3 id="10-数据节点内置平衡器-intra-datanode-balancer">10.数据节点内置平衡器（Intra-datanode balancer）</h3>
+
+<p>在单一DataNode管理多个磁盘情况下，在执行普通的写操作时，每个磁盘用量比较平均。但是，当添加或者更换磁盘时，将会导致一个DataNode磁盘用量的严重不均衡。由于目前HDFS均衡器关注点在于DataNode之间（inter-），而不是intra-，所以不能处理这种不均衡情况。</p>
+
+<p>在hadoop3 中，通过DataNode内部均衡功能已经可以处理上述情况，可以通过hdfs diskbalancer ClI来调用。</p>
+
+<h3 id="11-重写了守护进程和任务的堆管理机制">11.重写了守护进程和任务的堆管理机制</h3>
+
+<p>针对Hadoop守护进程和MapReduce任务的堆管理机制，Hadoop3 做了一系列的修改。</p>
+
+<p>HADOOP-10950 引入配置守护进程堆大小的新方法。特别地，HADOOP_HEAPSIZE配置方式已经被弃用，可以根据主机的内存大小进行自动调整。</p>
+
+<p>MAPREDUCE-5785 简化了MAP的配置，减少了任务堆的大小，所以不需要再任务配置和Java可选项中明确指出需要的堆大小。已经明确指出堆大小的现有配置不会受到该改变的影响。</p>
+
+<h3 id="12-s3gurad-为s3a文件系统客户端提供一致性和元数据缓存">12.S3Gurad:为S3A文件系统客户端提供一致性和元数据缓存</h3>
+
+<p>HADOOP-13345 为亚马逊S3存储的S3A客户端提供了可选特性：能够使用DynamoDB表作为文件和目录元数据的快速、一致性存储。</p>
+
+<h3 id="13-hdfs的基于路由器互联-hdfs-router-based-federation">13.HDFS的基于路由器互联（HDFS Router-Based Federation）</h3>
+
+<p>HDFS Router-Based Federation添加了一个RPC路由层，为多个HDFS命名空间提供了一个联合视图。这和现有的ViewFs、HDFS Federation功能类似，区别在于通过服务端管理表加载，而不是原来的客户端管理。从而简化了现存HDFS客户端接入federated cluster的操作。</p>
+
+<h3 id="14-基于api配置的capacity-scheduler-queue-configuration">14.基于API配置的Capacity Scheduler queue configuration</h3>
+
+<p>OrgQueue扩展了capacity scheduler，提供了一种编程方法，该方法提供了一个REST API来修改配置，用户可以通过远程调用来修改队列配置。这样一来，队列的administer_queue ACL的管理员就可以实现自动化的队列配置管理。</p>
+
+<h3 id="15-yarn资源类型">15.YARN资源类型</h3>
+
+<p>Yarn资源模型已经被一般化，可以支持用户自定义的可计算资源类型，而不仅仅是CPU和内存。比如，集群管理员可以定义像GPU数量，软件序列号、本地连接的存储的资源。然后，Yarn任务能够在这些可用资源上进行调度。</p>
+
+<p>###　16.YARN时间线服务 v.2(YARN Timeline Service v.2)</p>
+
+<p>YARN Timeline Service v.2用来应对两个主要挑战：（1）提高时间线服务的可扩展性、可靠性，（2）通过引入流(flow)和聚合(aggregation)来增强可用性。为了替代Timeline Service v.1.x，YARN Timeline Service v.2 alpha 2被提出来，这样用户和开发者就可以进行测试，并提供反馈和建议，不过YARN Timeline Service v.2还只能用在测试容器中。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">任海军</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-07-03
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content">MIT</span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="../../img/reward/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/hadoop/">Hadoop</a>
+          <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/ml/20190601_tf2_irisflowers/">
+            <span class="next-text nav-default">[Tensorflow2.0] Iris flower 分类问题</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+
+  
+
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'ytQYYji1sw27sHaCwKp4zxGz-gzGzoHsz',
+        appKey: 'POTrufGeHI9JrR6AujVXIn3v',
+        notify: 'false',
+        verify: 'false',
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor: 'false'
+    });
+  </script>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:navyup@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://www.facebook.com/haijun.ren.9" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://github.com/navyup" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/navyup" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://www.shakebyte.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 -
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy;
+    2017 -
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">ShakeByte</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

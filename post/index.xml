@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>ShakeByte</copyright>
-    <lastBuildDate>Sat, 01 Jun 2019 19:02:19 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jul 2019 15:26:04 -0500</lastBuildDate>
     
 	<atom:link href="http://www.shakebyte.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Hadoop3.x] 深入了解Hadoop 3.x</title>
+      <link>http://www.shakebyte.com/post/hadoop/20190804_hadoop3.0/</link>
+      <pubDate>Wed, 03 Jul 2019 15:26:04 -0500</pubDate>
+      
+      <guid>http://www.shakebyte.com/post/hadoop/20190804_hadoop3.0/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>[Tensorflow2.0] Iris flower 分类问题</title>
